@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Navigation | Portfolio Luxe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.75rem;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <!-- Navigation Header -->
+    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-700 rounded-lg"></div>
+                <h1 class="text-xl font-bold tracking-wide">Dashboard Luxe</h1>
+            </div>
+            <div class="text-sm text-gray-400 hidden md:block">
+                <span class="material-symbols-outlined align-middle text-sm mr-1">lock</span>
+                Accès Privé • 5 Portfolios Exclusifs
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 px-4 max-w-6xl mx-auto">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">
+                Portfolio Navigation
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Accédez aux 5 concepts de sites web luxe – chaque page représente un univers premium différent.
+            </p>
+            <div class="mt-6 flex justify-center gap-4">
+                <span class="px-4 py-2 bg-amber-900/30 text-amber-300 rounded-full text-sm">Automobile</span>
+                <span class="px-4 py-2 bg-purple-900/30 text-purple-300 rounded-full text-sm">Immobilier</span>
+                <span class="px-4 py-2 bg-teal-900/30 text-teal-300 rounded-full text-sm">Technologie</span>
+                <span class="px-4 py-2 bg-blue-900/30 text-blue-300 rounded-full text-sm">Espace de travail</span>
+                <span class="px-4 py-2 bg-gray-800 text-gray-300 rounded-full text-sm">Lifestyle</span>
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1: Vanguard Motors -->
+            <div class="glow-effect card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-amber-900/40 text-amber-300 rounded-full text-xs font-medium">Automobile</span>
+                    <span class="text-gray-500 text-sm">#01</span>
+                </div>
+                <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-800 rounded-lg flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white">directions_car</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Vanguard Motors</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Gestion d'actifs automobiles pour family offices. Transformation de la passion en performance financière.
+                    </p>
+                </div>
+                <div class="mt-auto">
+                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                        <span class="material-symbols-outlined text-sm mr-1">palette</span>
+                        Thème: Or/Noir • Luxe Automobile
+                    </div>
+                    <a href="code (1).html" 
+                       class="block w-full bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-3 rounded-lg text-center transition-all">
+                        Accéder au Portfolio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Velaris Privé -->
+            <div class="glow-effect card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-purple-900/40 text-purple-300 rounded-full text-xs font-medium">Immobilier</span>
+                    <span class="text-gray-500 text-sm">#02</span>
+                </div>
+                <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white">villa</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Velaris Privé</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Expériences de voyage d'avant-garde minimaliste. Souveraineté du déplacement dans les paysages les plus prestigieux.
+                    </p>
+                </div>
+                <div class="mt-auto">
+                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                        <span class="material-symbols-outlined text-sm mr-1">palette</span>
+                        Thème: Violet/Noir • Minimaliste
+                    </div>
+                    <a href="code (2).html" 
+                       class="block w-full bg-gradient-to-r from-purple-700 to-purple-800 hover:from-purple-600 hover:to-purple-700 text-white font-medium py-3 rounded-lg text-center transition-all">
+                        Accéder au Portfolio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: Zenith Cars -->
+            <div class="glow-effect card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-teal-900/40 text-teal-300 rounded-full text-xs font-medium">Technologie</span>
+                    <span class="text-gray-500 text-sm">#03</span>
+                </div>
+                <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-teal-600 to-teal-800 rounded-lg flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white">precision_manufacturing</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Zenith Cars</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Souveraineté silencieuse. Mobilité architecturale pour le souverain moderne, ingénierie de discrétion absolue.
+                    </p>
+                </div>
+                <div class="mt-auto">
+                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                        <span class="material-symbols-outlined text-sm mr-1">palette</span>
+                        Thème: Teal/Noir • Technologique
+                    </div>
+                    <a href="code (3).html" 
+                       class="block w-full bg-gradient-to-r from-teal-700 to-teal-800 hover:from-teal-600 hover:to-teal-700 text-white font-medium py-3 rounded-lg text-center transition-all">
+                        Accéder au Portfolio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4: Signature IWG -->
+            <div class="glow-effect card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-blue-900/40 text-blue-300 rounded-full text-xs font-medium">Espace de travail</span>
+                    <span class="text-gray-500 text-sm">#04</span>
+                </div>
+                <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white">business_center</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Signature by IWG</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Espaces de coworking luxueux. Accédez à 3000+ lieux prestigieux dans le monde, conçus pour l'excellence professionnelle.
+                    </p>
+                </div>
+                <div class="mt-auto">
+                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                        <span class="material-symbols-outlined text-sm mr-1">palette</span>
+                        Thème: Bleu/Or • Professionnel
+                    </div>
+                    <a href="code (4).html" 
+                       class="block w-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 rounded-lg text-center transition-all">
+                        Accéder au Portfolio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 5: Aureus Elite -->
+            <div class="glow-effect card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-xs font-medium">Lifestyle</span>
+                    <span class="text-gray-500 text-sm">#05</span>
+                </div>
+                <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-700 rounded-lg flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white">diamond</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Aureus Elite</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        L'État souverain de la performance. Optimisation biologique et réseautage haut de gamme pour l'élite mondiale.
+                    </p>
+                </div>
+                <div class="mt-auto">
+                    <div class="flex items-center text-gray-500 text-sm mb-4">
+                        <span class="material-symbols-outlined text-sm mr-1">palette</span>
+                        Thème: Or/Noir • Souveraineté
+                    </div>
+                    <a href="code.html" 
+                       class="block w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-medium py-3 rounded-lg text-center transition-all">
+                        Accéder au Portfolio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 6: Aperçu global -->
+            <div class="glow-effect card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-xl p-6 flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-gradient-to-r from-amber-500 via-purple-500 to-teal-500 text-white rounded-full text-xs font-medium">Vue d'ensemble</span>
+                    <span class="text-gray-500 text-sm">Dashboard</span>
+                </div>
+                <div class="mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white">dashboard</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Navigation Complète</h3>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Ce tableau de bord centralise l'accès à tous vos portfolios luxe. Chaque site est entièrement fonctionnel et responsive.
+                    </p>
+                </div>
+                <div class="mt-auto space-y-4">
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <span class="material-symbols-outlined text-sm mr-2 text-green-500">check_circle</span>
+                        Toutes les pages sont prêtes
+                    </div>
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <span class="material-symbols-outlined text-sm mr-2 text-green-500">check_circle</span>
+                        Design responsive mobile/desktop
+                    </div>
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <span class="material-symbols-outlined text-sm mr-2 text-green-500">check_circle</span>
+                        Navigation fluide entre les pages
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center">
+                <div class="text-2xl font-bold text-amber-400">5</div>
+                <div class="text-gray-400 text-sm mt-2">Portfolios Complets</div>
+            </div>
+            <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center">
+                <div class="text-2xl font-bold text-purple-400">100%</div>
+                <div class="text-gray-400 text-sm mt-2">Responsive Design</div>
+            </div>
+            <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center">
+                <div class="text-2xl font-bold text-teal-400">5</div>
+                <div class="text-gray-400 text-sm mt-2">Thèmes Uniques</div>
+            </div>
+            <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center">
+                <div class="text-2xl font-bold text-blue-400">1</div>
+                <div class="text-gray-400 text-sm mt-2">Dashboard Central</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-900 py-8 px-4">
+        <div class="max-w-6xl mx-auto text-center text-gray-500 text-sm">
+            <p>Dashboard de Navigation • Accès aux 5 portfolios luxe • Tous droits réservés</p>
+            <p class="mt-2">Chaque page est indépendante et peut être modifiée séparément</p>
+            <div class="mt-4 flex justify-center gap-6">
+                <a href="code (1).html" class="text-amber-400 hover:text-amber-300 transition">Vanguard</a>
+                <a href="code (2).html" class="text-purple-400 hover:text-purple-300 transition">Velaris</a>
+                <a href="code (3).html" class="text-teal-400 hover:text-teal-300 transition">Zenith</a>
+                <a href="code (4).html" class="text-blue-400 hover:text-blue-300 transition">Signature</a>
+                <a href="code.html" class="text-amber-300 hover:text-amber-200 transition">Aureus</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation simple pour les cartes
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-hover');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
