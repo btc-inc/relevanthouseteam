@@ -7,6 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <!-- GSAP et ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
@@ -15,6 +20,7 @@
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
             color: #e5e5e5;
+            overflow-x: hidden;
         }
         .card-hover {
             transition: all 0.3s ease;
@@ -26,39 +32,202 @@
         .brand-gradient {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
+        
+        /* Animations personnalisées */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+        
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+        }
+        
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        /* Splash d'accueil */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .splash-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4af37, #f7ef8a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 4px;
+        }
+        
+        /* Animation de chargement */
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(212, 175, 55, 0.3);
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Curseur personnalisé */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-dot {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #d4af37;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* Effet parallax */
+        .parallax-bg {
+            position: absolute;
+            width: 100%;
+            height: 120%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                       radial-gradient(circle at 70% 70%, rgba(10, 10, 10, 0.8) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        /* Marquee animé */
+        .marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .marquee-content {
+            display: flex;
+            gap: 60px;
+            animation: marquee 30s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Élément flottant */
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-black">
+    
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="text-center">
+            <div class="splash-logo">LUXURY PORTFOLIO</div>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Curseur personnalisé -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 py-4">
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 py-4 reveal-up">
         <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="size-8 bg-gradient-to-r from-amber-500 to-amber-300 rounded-full"></div>
+                <div class="size-8 bg-gradient-to-r from-amber-500 to-amber-300 rounded-full float-animation"></div>
                 <h1 class="text-xl font-semibold tracking-tight">LUXURY PORTFOLIO</h1>
             </div>
             <div class="hidden md:flex gap-8">
-                <a href="#showcase" class="text-sm text-white/60 hover:text-white transition-colors">Collections</a>
-                <a href="#about" class="text-sm text-white/60 hover:text-white transition-colors">À propos</a>
+                <a href="#showcase" class="text-sm text-white/60 hover:text-white transition-colors relative group">
+                    Collections
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#about" class="text-sm text-white/60 hover:text-white transition-colors relative group">
+                    À propos
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
             </div>
         </div>
     </nav>
 
+    <!-- Effet parallax -->
+    <div class="parallax-bg" id="parallaxBg"></div>
+
     <!-- Hero Section -->
-    <header class="pt-32 pb-20 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+    <header class="pt-32 pb-20 px-6 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight reveal-up">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-200">Élégance & Performance</span>
             </h1>
-            <p class="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+            <p class="text-xl text-white/70 mb-10 max-w-2xl mx-auto reveal-up">
                 Collection exclusive de marques de luxe et d'agences automobiles pour la clientèle exigeante
             </p>
-            <div class="flex gap-4 justify-center">
-                <a href="#showcase" class="px-8 py-3 bg-amber-500 text-black font-medium rounded-full hover:bg-amber-400 transition-all">
-                    Explorer les marques
+            <div class="flex gap-4 justify-center reveal-up">
+                <a href="#showcase" class="px-8 py-3 bg-amber-500 text-black font-medium rounded-full hover:bg-amber-400 transition-all group relative overflow-hidden">
+                    <span class="relative z-10">Explorer les marques</span>
+                    <div class="absolute inset-0 bg-amber-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </a>
-                <a href="#about" class="px-8 py-3 border border-white/20 rounded-full hover:bg-white/5 transition-all">
+                <a href="#about" class="px-8 py-3 border border-white/20 rounded-full hover:bg-white/5 transition-all group">
                     En savoir plus
+                    <span class="ml-2 material-symbols-outlined align-middle text-sm">arrow_forward</span>
                 </a>
+            </div>
+        </div>
+        
+        <!-- Marquee animé -->
+        <div class="marquee-container absolute bottom-10 left-0 opacity-10">
+            <div class="marquee-content">
+                <span class="text-2xl font-bold text-amber-400">EXCLUSIVITÉ</span>
+                <span class="text-2xl font-bold text-white">PRESTIGE</span>
+                <span class="text-2xl font-bold text-amber-400">EXCELLENCE</span>
+                <span class="text-2xl font-bold text-white">DISCIPLINE</span>
+                <span class="text-2xl font-bold text-amber-400">ARTISANAT</span>
+                <span class="text-2xl font-bold text-white">INNOVATION</span>
+                <span class="text-2xl font-bold text-amber-400">HERITAGE</span>
+                <span class="text-2xl font-bold text-white">PERFORMANCE</span>
             </div>
         </div>
     </header>
@@ -66,13 +235,13 @@
     <!-- Brands Grid -->
     <main id="showcase" class="py-16 px-6">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">Collection Exclusive</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center reveal-up">Collection Exclusive</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Vanguard Motors -->
-                <a href="VanguardMotors.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group">
+                <a href="VanguardMotors.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group reveal-up">
                     <div class="h-48 bg-gradient-to-br from-amber-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2069')] bg-cover opacity-20"></div>
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2069')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
                         <div class="absolute bottom-6 left-6">
                             <span class="text-xs font-semibold tracking-widest text-amber-400 uppercase">Automotive</span>
                             <h3 class="text-2xl font-bold mt-2">Vanguard Motors</h3>
@@ -82,15 +251,15 @@
                         <p class="text-white/60 text-sm mb-4">Gestion d'actifs automobiles d'élite pour family offices. Transformez la passion en performance.</p>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-amber-400 font-medium">Wealth in Motion</span>
-                            <span class="material-symbols-outlined text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            <span class="material-symbols-outlined text-amber-400 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2">arrow_forward</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Zenith Cars -->
-                <a href="ZENITH.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group">
+                <a href="ZENITH.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group reveal-up">
                     <div class="h-48 bg-gradient-to-br from-teal-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1563720223484-21c6c2d3c6c8?q=80&w=2070')] bg-cover opacity-20"></div>
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1563720223484-21c6c2d3c6c8?q=80&w=2070')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
                         <div class="absolute bottom-6 left-6">
                             <span class="text-xs font-semibold tracking-widest text-teal-400 uppercase">Automotive</span>
                             <h3 class="text-2xl font-bold mt-2">Zenith Cars</h3>
@@ -100,15 +269,15 @@
                         <p class="text-white/60 text-sm mb-4">Souveraineté silencieuse. Mobilité architecturale pour le souverain moderne.</p>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-teal-400 font-medium">Silent Sovereignty</span>
-                            <span class="material-symbols-outlined text-teal-400 opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            <span class="material-symbols-outlined text-teal-400 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2">arrow_forward</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Velaris Privé -->
-                <a href="VelarisPrivé.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group">
+                <a href="VelarisPrivé.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group reveal-up">
                     <div class="h-48 bg-gradient-to-br from-purple-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070')] bg-cover opacity-20"></div>
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
                         <div class="absolute bottom-6 left-6">
                             <span class="text-xs font-semibold tracking-widest text-purple-400 uppercase">Hospitality</span>
                             <h3 class="text-2xl font-bold mt-2">Velaris Privé</h3>
@@ -118,15 +287,15 @@
                         <p class="text-white/60 text-sm mb-4">Expériences avant-gardistes minimalistes à travers les paysages les plus prestigieux d'Europe.</p>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-purple-400 font-medium">Avant-Garde Minimalist</span>
-                            <span class="material-symbols-outlined text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            <span class="material-symbols-outlined text-purple-400 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2">arrow_forward</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Signature -->
-                <a href="Signature.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group">
+                <a href="Signature.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group reveal-up">
                     <div class="h-48 bg-gradient-to-br from-blue-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069')] bg-cover opacity-20"></div>
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
                         <div class="absolute bottom-6 left-6">
                             <span class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Workspace</span>
                             <h3 class="text-2xl font-bold mt-2">Signature by IWG</h3>
@@ -136,15 +305,15 @@
                         <p class="text-white/60 text-sm mb-4">Espaces de travail exclusifs conçus pour ceux qui exigent l'excellence et la discrétion.</p>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-blue-400 font-medium">Luxury Coworking</span>
-                            <span class="material-symbols-outlined text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            <span class="material-symbols-outlined text-blue-400 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2">arrow_forward</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- Aureus Elite -->
-                <a href="AureusElite.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group">
+                <a href="AureusElite.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group reveal-up">
                     <div class="h-48 bg-gradient-to-br from-yellow-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070')] bg-cover opacity-20"></div>
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
                         <div class="absolute bottom-6 left-6">
                             <span class="text-xs font-semibold tracking-widest text-yellow-400 uppercase">Lifestyle</span>
                             <h3 class="text-2xl font-bold mt-2">Aureus Elite</h3>
@@ -154,24 +323,24 @@
                         <p class="text-white/60 text-sm mb-4">Optimisation biologique et réseautage haut de gamme pour l'élite mondiale.</p>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-yellow-400 font-medium">Sovereign State of Performance</span>
-                            <span class="material-symbols-outlined text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            <span class="material-symbols-outlined text-yellow-400 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2">arrow_forward</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- All Brands Card -->
-                <div class="brand-gradient border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-center items-center p-8 text-center">
-                    <div class="size-20 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 flex items-center justify-center mb-6">
+                <div class="brand-gradient border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-center items-center p-8 text-center reveal-scale">
+                    <div class="size-20 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 flex items-center justify-center mb-6 float-animation">
                         <span class="material-symbols-outlined text-3xl text-white/60">dashboard</span>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Toutes les marques</h3>
                     <p class="text-white/50 text-sm mb-6">Accédez à l'ensemble du portfolio exclusif</p>
                     <div class="flex flex-wrap gap-3 justify-center">
-                        <a href="VanguardMotors.html" class="px-4 py-2 bg-amber-500/10 text-amber-400 rounded-full text-xs font-medium">Vanguard</a>
-                        <a href="ZENITH.html" class="px-4 py-2 bg-teal-500/10 text-teal-400 rounded-full text-xs font-medium">Zenith</a>
-                        <a href="VelarisPrivé.html" class="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-xs font-medium">Velaris</a>
-                        <a href="Signature.html" class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium">Signature</a>
-                        <a href="AureusElite.html" class="px-4 py-2 bg-yellow-500/10 text-yellow-400 rounded-full text-xs font-medium">Aureus</a>
+                        <a href="VanguardMotors.html" class="px-4 py-2 bg-amber-500/10 text-amber-400 rounded-full text-xs font-medium hover:bg-amber-500/20 transition-all">Vanguard</a>
+                        <a href="ZENITH.html" class="px-4 py-2 bg-teal-500/10 text-teal-400 rounded-full text-xs font-medium hover:bg-teal-500/20 transition-all">Zenith</a>
+                        <a href="VelarisPrivé.html" class="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-xs font-medium hover:bg-purple-500/20 transition-all">Velaris</a>
+                        <a href="Signature.html" class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium hover:bg-blue-500/20 transition-all">Signature</a>
+                        <a href="AureusElite.html" class="px-4 py-2 bg-yellow-500/10 text-yellow-400 rounded-full text-xs font-medium hover:bg-yellow-500/20 transition-all">Aureus</a>
                     </div>
                 </div>
             </div>
@@ -181,28 +350,28 @@
     <!-- About Section -->
     <section id="about" class="py-20 px-6 border-t border-white/10">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Portfolio d'Excellence</h2>
-            <p class="text-white/70 text-lg mb-10 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6 reveal-up">Portfolio d'Excellence</h2>
+            <p class="text-white/70 text-lg mb-10 max-w-2xl mx-auto reveal-up">
                 Cette collection représente le summum du luxe contemporain à travers différents secteurs : 
                 automobile, immobilier, espaces de travail et lifestyle. Chaque marque incarne une philosophie unique 
                 d'excellence, de discrétion et de performance.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="text-center p-6">
+                <div class="text-center p-6 reveal-left">
                     <div class="size-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-300/20 flex items-center justify-center">
                         <span class="material-symbols-outlined text-amber-400">diamond</span>
                     </div>
                     <h4 class="font-bold mb-2">Exclusivité</h4>
                     <p class="text-white/60 text-sm">Accès réservé à une clientèle sélectionnée</p>
                 </div>
-                <div class="text-center p-6">
+                <div class="text-center p-6 reveal-up">
                     <div class="size-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-teal-500/20 to-blue-500/20 flex items-center justify-center">
                         <span class="material-symbols-outlined text-teal-400">design_services</span>
                     </div>
                     <h4 class="font-bold mb-2">Design Avant-Garde</h4>
                     <p class="text-white/60 text-sm">Esthétique minimaliste et futuriste</p>
                 </div>
-                <div class="text-center p-6">
+                <div class="text-center p-6 reveal-right">
                     <div class="size-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 flex items-center justify-center">
                         <span class="material-symbols-outlined text-purple-400">security</span>
                     </div>
@@ -218,7 +387,7 @@
         <div class="max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center gap-3 mb-6 md:mb-0">
-                    <div class="size-8 bg-gradient-to-r from-amber-500 to-amber-300 rounded-full"></div>
+                    <div class="size-8 bg-gradient-to-r from-amber-500 to-amber-300 rounded-full float-animation"></div>
                     <span class="text-lg font-semibold">LUXURY PORTFOLIO</span>
                 </div>
                 <div class="text-center md:text-right">
@@ -230,7 +399,134 @@
     </footer>
 
     <script>
-        // Smooth scroll for anchor links
+        // Initialiser GSAP avec ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animation de la splash screen
+        window.addEventListener('load', () => {
+            gsap.to('#splashScreen', {
+                opacity: 0,
+                duration: 0.8,
+                delay: 1.5,
+                onComplete: () => {
+                    document.getElementById('splashScreen').style.display = 'none';
+                    initAnimations();
+                }
+            });
+        });
+
+        // Curseur personnalisé
+        const cursor = document.getElementById('customCursor');
+        const cursorDot = document.getElementById('cursorDot');
+
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX - 10,
+                y: e.clientY - 10,
+                duration: 0.1
+            });
+            
+            gsap.to(cursorDot, {
+                x: e.clientX - 2,
+                y: e.clientY - 2,
+                duration: 0.05
+            });
+        });
+
+        // Effet parallax
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 20;
+            const y = (e.clientY / window.innerHeight) * 20;
+            
+            gsap.to('#parallaxBg', {
+                backgroundPosition: `${x}% ${y}%`,
+                duration: 0.5,
+                ease: 'power1.out'
+            });
+        });
+
+        // Fonction d'initialisation des animations
+        function initAnimations() {
+            // Animation de la navigation
+            gsap.from('nav', {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+
+            // Animations des éléments reveal
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale');
+            
+            revealElements.forEach(element => {
+                gsap.from(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 0,
+                    y: element.classList.contains('reveal-up') ? 60 : 0,
+                    x: element.classList.contains('reveal-left') ? -60 : 
+                       element.classList.contains('reveal-right') ? 60 : 0,
+                    scale: element.classList.contains('reveal-scale') ? 0.9 : 1,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            });
+
+            // Animation des cartes avec délai
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%'
+                    },
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: 'power2.out'
+                });
+            });
+
+            // Animation du texte hero
+            gsap.from('header h1', {
+                opacity: 0,
+                y: 60,
+                duration: 1.2,
+                delay: 0.2,
+                ease: 'power3.out'
+            });
+
+            gsap.from('header p', {
+                opacity: 0,
+                y: 40,
+                duration: 1,
+                delay: 0.4,
+                ease: 'power3.out'
+            });
+
+            gsap.from('header .flex', {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                delay: 0.6,
+                ease: 'power3.out'
+            });
+
+            // Animation du marquee
+            const marquee = document.querySelector('.marquee-content');
+            gsap.to(marquee, {
+                xPercent: -50,
+                duration: 30,
+                repeat: -1,
+                ease: 'none'
+            });
+        }
+
+        // Smooth scroll pour les liens d'ancrage
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -239,11 +535,34 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: {
+                            y: targetElement,
+                            offsetY: 80
+                        },
+                        ease: 'power2.inOut'
                     });
                 }
+            });
+        });
+
+        // Effet hover sur les boutons
+        document.querySelectorAll('a[href], button').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                gsap.to(cursor, {
+                    scale: 1.5,
+                    backgroundColor: 'rgba(212, 175, 55, 0.3)',
+                    duration: 0.2
+                });
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                gsap.to(cursor, {
+                    scale: 1,
+                    backgroundColor: 'rgba(212, 175, 55, 0.2)',
+                    duration: 0.2
+                });
             });
         });
     </script>
