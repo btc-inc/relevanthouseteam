@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Vanguard Motors Agency | Wealth in Motion</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- GSAP CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&amp;family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -43,110 +37,33 @@
         .subterranean-gradient {
             background: linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,1) 100%);
         }
-        
-        /* Custom Animation Classes */
-        .reveal-text {
-            clip-path: inset(0 100% 0 0);
-            transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        html {
+            scroll-behavior: smooth;
         }
-        .reveal-text.visible {
-            clip-path: inset(0 0 0 0);
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-        
-        .image-hover-zoom {
-            transition: transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+        button, a, .group, input[type="submit"] {
+            cursor: pointer;
         }
-        
-        .nav-hidden {
-            transform: translateY(-100%);
-        }
-        
-        .counter {
+        img {
             opacity: 0;
-            transform: translateY(20px);
+            transition: opacity 0.3s ease;
         }
-        
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(90deg, #eca413, #ffd700);
-            z-index: 9999;
-            transition: width 0.1s ease;
-        }
-        
-        /* Cursor Effect */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #eca413;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s ease;
-        }
-        
-        .cursor-ring {
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(236, 164, 19, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        
-        /* Page Load Animation */
-        .page-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0a0a0a;
-            z-index: 99999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform: translateY(0);
-        }
-        
-        .page-transition-logo {
-            opacity: 0;
-            transform: scale(0.8);
+        img.loaded {
+            opacity: 1;
         }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200 antialiased overflow-x-hidden">
-<!-- Custom Cursor (Desktop only) -->
-<div class="cursor-dot hidden lg:block"></div>
-<div class="cursor-ring hidden lg:block"></div>
-
-<!-- Scroll Progress Bar -->
-<div class="scroll-progress"></div>
-
-<!-- Page Load Animation -->
-<div class="page-transition">
-    <div class="page-transition-logo">
-        <svg width="60" height="60" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#eca413">
-            <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z"></path>
-        </svg>
-    </div>
-</div>
-
 <!-- TopNavBar -->
 <div class="relative flex h-auto w-full flex-col">
 <div class="layout-container flex h-full grow flex-col">
-<div id="navbar" class="w-full flex justify-center py-0 fixed top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 transition-transform duration-500">
+<div class="w-full flex justify-center py-0 fixed top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5">
 <div class="layout-content-container flex flex-col w-full max-w-[1200px] flex-1">
 <header class="flex items-center justify-between whitespace-nowrap px-6 py-4">
 <div class="flex items-center gap-3">
-<div class="size-8 text-primary nav-logo">
+<div class="size-8 text-primary">
 <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
 <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
 <path clip-rule="evenodd" d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z" fill="currentColor" fill-rule="evenodd"></path>
@@ -156,20 +73,11 @@
 </div>
 <div class="flex flex-1 justify-end gap-10 items-center">
 <div class="hidden md:flex items-center gap-10">
-<a class="nav-link text-platinum/70 hover:text-primary text-sm font-medium transition-colors relative group" href="#philosophy">
-    <span>Philosophy</span>
-    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
-</a>
-<a class="nav-link text-platinum/70 hover:text-primary text-sm font-medium transition-colors relative group" href="#ecosystem">
-    <span>Ecosystem</span>
-    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
-</a>
-<a class="nav-link text-platinum/70 hover:text-primary text-sm font-medium transition-colors relative group" href="#vault">
-    <span>The Vault</span>
-    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
-</a>
+<a class="text-platinum/70 hover:text-primary text-sm font-medium transition-colors" href="#philosophy">Philosophy</a>
+<a class="text-platinum/70 hover:text-primary text-sm font-medium transition-colors" href="#ecosystem">Ecosystem</a>
+<a class="text-platinum/70 hover:text-primary text-sm font-medium transition-colors" href="#vault">The Vault</a>
 </div>
-<button id="request-access-btn" class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-10 px-6 bg-primary text-background-dark text-xs font-bold uppercase tracking-widest hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-10 px-6 bg-primary text-background-dark text-xs font-bold uppercase tracking-widest hover:bg-primary/90 transition-all">
 <span>Request Access</span>
 </button>
 </div>
@@ -181,23 +89,23 @@
 <!-- HeroSection -->
 <div class="relative flex min-h-screen w-full flex-col">
 <div class="flex-1 flex justify-center items-center">
-<div class="w-full h-screen absolute inset-0 hero-image-container">
+<div class="w-full h-screen absolute inset-0">
 <div class="absolute inset-0 bg-black/40 z-10"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10"></div>
-<img class="w-full h-full object-cover grayscale-[0.2] image-hover-zoom" data-alt="Cinematic shot of a luxury Bugatti in a Swiss mountain vault" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWFprreBlw2QlbrFRcVg3_s20R_K28tz5Kp8RZFnW2jwWi1hAvBzCxfo_GhxHD7aDHfzWXaGK6VTErNt9PWHyMCA2IBIJGaSBPAL0KKg7VEqN6kSVuQ0vPoLSCJKhONeIYP6oeB5DjNh0ilzNHreoGMqDwoTXgqEMFxc1hCDOGkE1Fu5gw_yRUGAK2IDK6hNo0Hdq9vIJeGSCN6NPD2PV37uK8MuvLHJY649RrD8rGFEf3tZPk8DH6t-UdUV010imA8EK--vno98Ko"/>
+<img class="w-full h-full object-cover grayscale-[0.2]" data-alt="Cinematic shot of a luxury Bugatti in a Swiss mountain vault" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWFprreBlw2QlbrFRcVg3_s20R_K28tz5Kp8RZFnW2jwWi1hAvBzCxfo_GhxHD7aDHfzWXaGK6VTErNt9PWHyMCA2IBIJGaSBPAL0KKg7VEqN6kSVuQ0vPoLSCJKhONeIYP6oeB5DjNh0ilzNHreoGMqDwoTXgqEMFxc1hCDOGkE1Fu5gw_yRUGAK2IDK6hNo0Hdq9vIJeGSCN6NPD2PV37uK8MuvLHJY649RrD8rGFEf3tZPk8DH6t-UdUV010imA8EK--vno98Ko"/>
 </div>
-<div class="relative z-20 text-center px-4 max-w-[960px]">
-<h1 class="text-platinum text-6xl md:text-8xl font-serif font-semibold leading-tight tracking-tight mb-6 hero-title">
-                    Wealth in <span class="text-primary italic hero-highlight">Motion</span>
+<div class="relative z-20 text-center px-4 max-w-[960px] animate-in fade-in slide-in-from-bottom-10 duration-1000">
+<h1 class="text-platinum text-6xl md:text-8xl font-serif font-semibold leading-tight tracking-tight mb-6">
+                    Wealth in <span class="text-primary italic">Motion</span>
 </h1>
-<p class="text-platinum/80 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-10 hero-subtitle">
+<p class="text-platinum/80 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-10">
                     Elite automotive asset management tailored for the modern family office. We transform passion into high-performance alpha.
                 </p>
-<div class="flex flex-col md:flex-row gap-4 justify-center items-center hero-buttons">
-<button class="cta-primary flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-14 px-8 bg-primary text-background-dark text-sm font-bold uppercase tracking-widest hover:scale-105 transition-all">
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+<button class="flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-14 px-8 bg-primary text-background-dark text-sm font-bold uppercase tracking-widest hover:scale-105 transition-all">
                         Request Private Access
                     </button>
-<button class="cta-secondary flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-14 px-8 border border-platinum/30 text-platinum text-sm font-bold uppercase tracking-widest hover:bg-white/5 transition-all">
+<button class="flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-14 px-8 border border-platinum/30 text-platinum text-sm font-bold uppercase tracking-widest hover:bg-white/5 transition-all">
                         View Portfolio
                     </button>
 </div>
@@ -207,18 +115,18 @@
 <!-- FeatureSection (Philosophy) -->
 <div class="relative bg-background-dark py-24 md:py-32" id="philosophy">
 <div class="max-w-[1200px] mx-auto px-6">
-<div class="flex flex-col md:flex-row gap-16 items-start philosophy-container">
-<div class="flex-1 flex flex-col gap-8 philosophy-text">
-<h2 class="text-primary font-bold uppercase tracking-[0.3em] text-xs philosophy-label">The Philosophy</h2>
-<h1 class="text-platinum text-4xl md:text-5xl font-serif leading-tight philosophy-headline">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<div class="flex-1 flex flex-col gap-8">
+<h2 class="text-primary font-bold uppercase tracking-[0.3em] text-xs">The Philosophy</h2>
+<h1 class="text-platinum text-4xl md:text-5xl font-serif leading-tight">
                         Moving beyond passion into the <span class="italic">realm of Alpha.</span>
 </h1>
-<p class="text-platinum/60 text-lg leading-relaxed philosophy-description">
+<p class="text-platinum/60 text-lg leading-relaxed">
                         We treat automotive collections as sophisticated alternative assets. In an era of market volatility, rare hyper-cars represent a unique asset class that offers tangible value, historical permanence, and institutional-grade appreciation potential.
                     </p>
 </div>
-<div class="flex-1 grid grid-cols-1 gap-6 w-full philosophy-cards">
-<div class="group flex gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-8 transition-all hover:bg-white/[0.04] hover:-translate-y-1 duration-300 philosophy-card">
+<div class="flex-1 grid grid-cols-1 gap-6 w-full">
+<div class="group flex gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-8 transition-all hover:bg-white/[0.04]">
 <div class="text-primary mt-1">
 <span class="material-symbols-outlined !text-4xl">trending_up</span>
 </div>
@@ -227,7 +135,7 @@
 <p class="text-platinum/50 text-sm leading-relaxed">Identifying vehicles with significant appreciation potential through proprietary data and global networks.</p>
 </div>
 </div>
-<div class="group flex gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-8 transition-all hover:bg-white/[0.04] hover:-translate-y-1 duration-300 philosophy-card">
+<div class="group flex gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-8 transition-all hover:bg-white/[0.04]">
 <div class="text-primary mt-1">
 <span class="material-symbols-outlined !text-4xl">verified_user</span>
 </div>
@@ -243,16 +151,16 @@
 <!-- SectionHeader -->
 <div class="bg-background-dark pt-20" id="ecosystem">
 <div class="max-w-[1200px] mx-auto px-6 text-center">
-<h2 class="text-platinum text-3xl md:text-4xl font-serif italic mb-2 ecosystem-title">Strategic Ecosystem</h2>
-<div class="h-px w-20 bg-primary mx-auto mb-16 opacity-50 ecosystem-line"></div>
+<h2 class="text-platinum text-3xl md:text-4xl font-serif italic mb-2">Strategic Ecosystem</h2>
+<div class="h-px w-20 bg-primary mx-auto mb-16 opacity-50"></div>
 </div>
 </div>
 <!-- TextGrid (Ecosystem) -->
 <div class="bg-background-dark pb-24">
 <div class="max-w-[1200px] mx-auto px-6">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 ecosystem-cards">
-<div class="flex flex-col gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-10 items-center text-center hover:-translate-y-2 transition-all duration-500 ecosystem-card">
-<div class="text-primary bg-primary/10 size-16 rounded-full flex items-center justify-center ecosystem-icon">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-10 items-center text-center">
+<div class="text-primary bg-primary/10 size-16 rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined !text-3xl">handshake</span>
 </div>
 <div class="flex flex-col gap-3">
@@ -260,8 +168,8 @@
 <p class="text-platinum/50 text-sm leading-relaxed">Sourcing the unobtainable through off-market global networks and private provenance verifications.</p>
 </div>
 </div>
-<div class="flex flex-col gap-6 rounded-lg border border-primary/20 bg-white/[0.03] p-10 items-center text-center shadow-[0_0_40px_rgba(236,164,19,0.05)] hover:-translate-y-2 transition-all duration-500 ecosystem-card">
-<div class="text-primary bg-primary/10 size-16 rounded-full flex items-center justify-center ecosystem-icon">
+<div class="flex flex-col gap-6 rounded-lg border border-primary/20 bg-white/[0.03] p-10 items-center text-center shadow-[0_0_40px_rgba(236,164,19,0.05)]">
+<div class="text-primary bg-primary/10 size-16 rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined !text-3xl">public</span>
 </div>
 <div class="flex flex-col gap-3">
@@ -269,8 +177,8 @@
 <p class="text-platinum/50 text-sm leading-relaxed">White-glove global transport and Swiss-standard subterranean, climate-controlled storage vaults.</p>
 </div>
 </div>
-<div class="flex flex-col gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-10 items-center text-center hover:-translate-y-2 transition-all duration-500 ecosystem-card">
-<div class="text-primary bg-primary/10 size-16 rounded-full flex items-center justify-center ecosystem-icon">
+<div class="flex flex-col gap-6 rounded-lg border border-white/5 bg-white/[0.02] p-10 items-center text-center">
+<div class="text-primary bg-primary/10 size-16 rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined !text-3xl">query_stats</span>
 </div>
 <div class="flex flex-col gap-3">
@@ -285,18 +193,18 @@
 <div class="bg-background-dark py-24 relative overflow-hidden" id="vault">
 <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50"></div>
 <div class="max-w-[1200px] mx-auto px-6 relative z-10">
-<div class="flex justify-between items-end mb-12 vault-header">
+<div class="flex justify-between items-end mb-12">
 <div>
-<h2 class="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 vault-label">Inventory</h2>
-<h3 class="text-platinum text-4xl font-serif italic vault-title">The Subterranean Vault</h3>
+<h2 class="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4">Inventory</h2>
+<h3 class="text-platinum text-4xl font-serif italic">The Subterranean Vault</h3>
 </div>
-<a class="text-primary text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:gap-4 transition-all vault-link" href="#">
+<a class="text-primary text-xs uppercase tracking-widest font-bold flex items-center gap-2 hover:gap-4 transition-all" href="#">
                     Full Catalog <span class="material-symbols-outlined !text-lg">arrow_forward</span>
 </a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 vault-cards">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Item 1 -->
-<div class="group relative overflow-hidden rounded-lg bg-white/[0.02] border border-white/5 vault-card">
+<div class="group relative overflow-hidden rounded-lg bg-white/[0.02] border border-white/5">
 <div class="aspect-[4/5] relative">
 <img class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" data-alt="Modern hypercar in low-light studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxfI0j_YLDE6W0WhW--8JdrLFBC54RFJj6OQYEDu1THaPL05TWnkB5Q4qAhhFZpGcj0VwlwzCoBCLEbyZOnC9i-N_i5PWTo7J79bjuqZ8fM6cEsb1k7kIt4OBmePUNQDHX-Ts650gjMicSTOXyfwiywjb5MBe_ueU0cX7RxwEwcf0SLUEGH-fbGYyp9eiRUYBVRgSTYG-oFw8dD6crcOZKdEtM04GS-c4x7mVAi2S2uPhCAba060S5KsbDcTN3tDcLZ5_Gy-Dvqw0g"/>
 <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
@@ -312,7 +220,7 @@
 </div>
 </div>
 <!-- Item 2 -->
-<div class="group relative overflow-hidden rounded-lg bg-white/[0.02] border border-white/5 vault-card">
+<div class="group relative overflow-hidden rounded-lg bg-white/[0.02] border border-white/5">
 <div class="aspect-[4/5] relative">
 <img class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" data-alt="Luxury car rear detail with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_zpOk4-tVl0fffd78-cmC1z9dmszPIgCpSHBK9ZkbfyD3I7LlyQo7cP8YGh_iDWWUmwvgb7FmPlBHPzbKUx-EECbg7u6lAP47F1VafVNq10l2jX7TCbdPo91zpVUV5XRXv2eU6vqrHyIw4OyvnJDEfvBUZMhRWUZaBmivXH8f1XM521QhG7aVr10Yj6xrmm_Zgcb7uY_X-MbVxtoNSdxZp61SFurCX3sGAksw8s8KfhZsGvF5DYBhNdO53cSla4nAtS_ratP-0ujt"/>
 <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
@@ -328,7 +236,7 @@
 </div>
 </div>
 <!-- Item 3 -->
-<div class="group relative overflow-hidden rounded-lg bg-white/[0.02] border border-white/5 vault-card">
+<div class="group relative overflow-hidden rounded-lg bg-white/[0.02] border border-white/5">
 <div class="aspect-[4/5] relative">
 <img class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" data-alt="Detail of a classic silver Porsche engine or body" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLd4dKySCWIeOFNOwLgUCg_-ZfL1G7vryTAb0AL4tp0nggp9oe0G-7wf6jqCPU6vRGu6ZyZSrdGZJSXkswsq46Zp19hzL2FWWvgmvPA_VsbvB4K2xumNCkKzQ1KCME-_yaINUyuVTKCSPdN6XE-Wsuk7cbQkHrEqcAlVKllW1eGNHcqPPjfCViEemNziY-dfOa3cyr7-P8pLIQaSGd2pdhEQfUpoDdJfqCvVWEJvChz7nx_or6KHnRm8CgseYRWW9908Kd0njhEd28"/>
 <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
@@ -347,13 +255,13 @@
 </div>
 </div>
 <!-- Contact CTA Section -->
-<div class="bg-background-dark py-24 border-t border-white/5 contact-section">
+<div class="bg-background-dark py-24 border-t border-white/5">
 <div class="max-w-[800px] mx-auto px-6 text-center">
-<h2 class="text-platinum text-4xl md:text-5xl font-serif italic mb-6 contact-title">Enter the Vault</h2>
-<p class="text-platinum/60 text-lg mb-12 contact-subtitle">Access to the Vanguard portfolio is by invitation only. Please submit your credentials for a private consultation.</p>
-<div class="bg-white/[0.03] border border-white/10 p-2 rounded-lg flex flex-col md:flex-row gap-2 max-w-md mx-auto contact-form">
-<input class="flex-1 bg-transparent border-none text-platinum placeholder:text-platinum/30 focus:ring-0 px-4 py-3 focus:outline-none focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all" placeholder="Professional Email Address" type="email"/>
-<button id="inquire-btn" class="bg-primary text-background-dark px-8 py-3 rounded text-xs font-bold uppercase tracking-widest hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
+<h2 class="text-platinum text-4xl md:text-5xl font-serif italic mb-6">Enter the Vault</h2>
+<p class="text-platinum/60 text-lg mb-12">Access to the Vanguard portfolio is by invitation only. Please submit your credentials for a private consultation.</p>
+<div class="bg-white/[0.03] border border-white/10 p-2 rounded-lg flex flex-col md:flex-row gap-2 max-w-md mx-auto">
+<input class="flex-1 bg-transparent border-none text-platinum placeholder:text-platinum/30 focus:ring-0 px-4 py-3" placeholder="Professional Email Address" type="email"/>
+<button class="bg-primary text-background-dark px-8 py-3 rounded text-xs font-bold uppercase tracking-widest hover:bg-primary/90 transition-all">
                     Inquire
                 </button>
 </div>
@@ -366,365 +274,359 @@
 <h2 class="text-white/40 text-lg font-serif uppercase tracking-[0.2em]">Vanguard Motors Agency</h2>
 </div>
 <div class="flex gap-8">
-<a class="text-white/30 hover:text-primary text-[10px] uppercase tracking-widest transition-colors hover:scale-105" href="#">Privacy Policy</a>
-<a class="text-white/30 hover:text-primary text-[10px] uppercase tracking-widest transition-colors hover:scale-105" href="#">Terms of Engagement</a>
-<a class="text-white/30 hover:text-primary text-[10px] uppercase tracking-widest transition-colors hover:scale-105" href="#">Institutional Portal</a>
+<a class="text-white/30 hover:text-primary text-[10px] uppercase tracking-widest transition-colors" href="#">Privacy Policy</a>
+<a class="text-white/30 hover:text-primary text-[10px] uppercase tracking-widest transition-colors" href="#">Terms of Engagement</a>
+<a class="text-white/30 hover:text-primary text-[10px] uppercase tracking-widest transition-colors" href="#">Institutional Portal</a>
 </div>
 <p class="text-white/20 text-[10px] uppercase tracking-[0.2em]">© 2024 VMA - Geneva • London • Dubai</p>
 </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>
-        // Page Load Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            // Animate page load
-            const tl = gsap.timeline();
-            
-            tl.to('.page-transition-logo', {
-                opacity: 1,
-                scale: 1,
-                duration: 1,
-                ease: "power3.out"
-            })
-            .to('.page-transition-logo', {
-                opacity: 0,
-                scale: 1.5,
-                duration: 0.8,
-                ease: "power3.in"
-            })
-            .to('.page-transition', {
-                y: "-100%",
-                duration: 1,
-                ease: "power3.inOut",
-                delay: 0.2
-            });
-            
-            // Initialize Lenis smooth scroll
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                smooth: true,
-                smoothTouch: false,
-                touchMultiplier: 2,
-            });
-            
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-            
-            requestAnimationFrame(raf);
-            
-            // GSAP Animations
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Hero Section Animation
-            gsap.from('.hero-title', {
-                y: 100,
-                opacity: 0,
-                duration: 1.5,
-                ease: "power3.out",
-                delay: 0.5
-            });
-            
-            gsap.from('.hero-highlight', {
-                scale: 0.5,
-                opacity: 0,
-                rotation: 10,
-                duration: 1,
-                ease: "back.out(1.7)",
-                delay: 1
-            });
-            
-            gsap.from('.hero-subtitle', {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                delay: 1.2
-            });
-            
-            gsap.from('.hero-buttons', {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                delay: 1.5,
-                stagger: 0.2
-            });
-            
-            // Navbar animation on scroll
-            let lastScroll = 0;
-            const navbar = document.getElementById('navbar');
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll <= 0) {
-                    navbar.classList.remove('nav-hidden');
-                    return;
-                }
-                
-                if (currentScroll > lastScroll && currentScroll > 100) {
-                    navbar.classList.add('nav-hidden');
-                } else {
-                    navbar.classList.remove('nav-hidden');
-                }
-                
-                lastScroll = currentScroll;
-            });
-            
-            // Philosophy Section Animation
-            gsap.from('.philosophy-label', {
-                scrollTrigger: {
-                    trigger: '#philosophy',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                x: -50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.philosophy-headline', {
-                scrollTrigger: {
-                    trigger: '#philosophy',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1.2,
-                delay: 0.2,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.philosophy-description', {
-                scrollTrigger: {
-                    trigger: '#philosophy',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                delay: 0.4,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.philosophy-card', {
-                scrollTrigger: {
-                    trigger: '#philosophy',
-                    start: 'top 70%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.6,
-                stagger: 0.3,
-                ease: "power3.out"
-            });
-            
-            // Ecosystem Section Animation
-            gsap.from('.ecosystem-title', {
-                scrollTrigger: {
-                    trigger: '#ecosystem',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.ecosystem-line', {
-                scrollTrigger: {
-                    trigger: '#ecosystem',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                scaleX: 0,
-                duration: 1.5,
-                delay: 0.3,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.ecosystem-card', {
-                scrollTrigger: {
-                    trigger: '.ecosystem-cards',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 80,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out"
-            });
-            
-            // Vault Section Animation
-            gsap.from('.vault-header', {
-                scrollTrigger: {
-                    trigger: '#vault',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.vault-card', {
-                scrollTrigger: {
-                    trigger: '#vault',
-                    start: 'top 70%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 100,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.3,
-                ease: "power3.out"
-            });
-            
-            // Contact Section Animation
-            gsap.from('.contact-title', {
-                scrollTrigger: {
-                    trigger: '.contact-section',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.contact-subtitle', {
-                scrollTrigger: {
-                    trigger: '.contact-section',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                delay: 0.2,
-                ease: "power3.out"
-            });
-            
-            gsap.from('.contact-form', {
-                scrollTrigger: {
-                    trigger: '.contact-section',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none none'
-                },
-                scale: 0.8,
-                opacity: 0,
-                duration: 1,
-                delay: 0.4,
-                ease: "back.out(1.7)"
-            });
-            
-            // Scroll progress bar
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.querySelector('.scroll-progress').style.width = scrolled + '%';
-            });
-            
-            // Custom cursor (desktop only)
-            if (window.innerWidth > 1024) {
-                const cursorDot = document.querySelector('.cursor-dot');
-                const cursorRing = document.querySelector('.cursor-ring');
-                
-                document.addEventListener('mousemove', (e) => {
-                    cursorDot.style.left = e.clientX + 'px';
-                    cursorDot.style.top = e.clientY + 'px';
-                    
-                    setTimeout(() => {
-                        cursorRing.style.left = e.clientX + 'px';
-                        cursorRing.style.top = e.clientY + 'px';
-                    }, 100);
-                });
-                
-                // Interactive elements effect
-                const interactiveElements = document.querySelectorAll('a, button, .vault-card, .philosophy-card, .ecosystem-card');
-                
-                interactiveElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        cursorDot.style.transform = 'scale(2)';
-                        cursorRing.style.transform = 'scale(1.5)';
-                        cursorRing.style.borderColor = '#eca413';
-                    });
-                    
-                    el.addEventListener('mouseleave', () => {
-                        cursorDot.style.transform = 'scale(1)';
-                        cursorRing.style.transform = 'scale(1)';
-                        cursorRing.style.borderColor = 'rgba(236, 164, 19, 0.3)';
-                    });
-                });
-            }
-            
-            // Button click animations
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    // Ripple effect
-                    const ripple = document.createElement('span');
-                    const rect = button.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.7);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        width: ${size}px;
-                        height: ${size}px;
-                        top: ${y}px;
-                        left: ${x}px;
-                    `;
-                    
-                    button.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
-                });
-            });
-            
-            // Add CSS for ripple animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
+gsap.registerPlugin(ScrollTrigger);
+
+// Préchargement d'images
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        const tempImg = new Image();
+        tempImg.src = img.src;
+        tempImg.onload = () => {
+            img.classList.add('loaded');
+        };
+    });
+});
+
+// Animation du logo et navigation
+gsap.from(".flex.items-center.gap-3, .flex-1.justify-end", {
+    duration: 1.2,
+    y: -40,
+    opacity: 0,
+    stagger: 0.2,
+    ease: "power3.out"
+});
+
+// Animation hero avec effet de révélation
+gsap.from(".text-center h1", {
+    duration: 1.8,
+    y: 100,
+    opacity: 0,
+    ease: "power4.out",
+    delay: 0.3
+});
+
+gsap.from(".text-center p", {
+    duration: 1.5,
+    y: 60,
+    opacity: 0,
+    delay: 0.8,
+    ease: "power3.out"
+});
+
+gsap.from(".flex-col button", {
+    duration: 1.2,
+    y: 40,
+    opacity: 0,
+    stagger: 0.2,
+    delay: 1.2,
+    ease: "power3.out"
+});
+
+// Animation des sections au défilement
+gsap.utils.toArray("[id]").forEach(section => {
+    gsap.from(section, {
+        scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            toggleActions: "play none none reverse"
+        },
+        y: 80,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power3.out"
+    });
+});
+
+// Animation des cartes de fonctionnalités
+gsap.utils.toArray(".group.flex.gap-6").forEach((card, i) => {
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top 85%"
+        },
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        delay: i * 0.2,
+        ease: "power3.out"
+    });
+});
+
+// Animation des cartes d'écosystème
+gsap.utils.toArray(".flex.flex-col.gap-6.rounded-lg").forEach((card, i) => {
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top 80%"
+        },
+        y: 60,
+        opacity: 0,
+        scale: 0.9,
+        duration: 1.2,
+        delay: i * 0.15,
+        ease: "back.out(1.7)"
+    });
+});
+
+// Animation des cartes de voitures
+document.querySelectorAll('.group.relative').forEach(card => {
+    // Animation initiale
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top 85%"
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out"
+    });
+    
+    // Animation hover
+    card.addEventListener('mouseenter', () => {
+        gsap.to(card.querySelector('img'), {
+            scale: 1.1,
+            duration: 0.8,
+            ease: "power2.out"
         });
-    </script>
+        
+        gsap.to(card, {
+            y: -10,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+        
+        // Animation du badge
+        const badge = card.querySelector('span.bg-primary\\/20');
+        if (badge) {
+            gsap.to(badge, {
+                scale: 1.1,
+                backgroundColor: "rgba(236, 164, 19, 0.4)",
+                duration: 0.3
+            });
+        }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        gsap.to(card.querySelector('img'), {
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+        
+        gsap.to(card, {
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+        
+        const badge = card.querySelector('span.bg-primary\\/20');
+        if (badge) {
+            gsap.to(badge, {
+                scale: 1,
+                backgroundColor: "rgba(236, 164, 19, 0.2)",
+                duration: 0.3
+            });
+        }
+    });
+});
+
+// Animation de l'image hero (parallax)
+gsap.to(".w-full.h-full.object-cover", {
+    scrollTrigger: {
+        trigger: ".relative.flex.min-h-screen",
+        scrub: true
+    },
+    scale: 1.15,
+    duration: 3
+});
+
+// Animation du gradient radial
+gsap.to(".absolute.inset-0", {
+    scrollTrigger: {
+        trigger: "#vault",
+        scrub: true
+    },
+    opacity: 0.8,
+    duration: 2
+});
+
+// Animation du formulaire
+gsap.from(".bg-white\\/\\[0\\.03\\]", {
+    scrollTrigger: {
+        trigger: ".bg-background-dark.py-24",
+        start: "top 80%"
+    },
+    scale: 0.95,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power3.out"
+});
+
+// Animation hover pour les boutons primaires
+document.querySelectorAll('button.bg-primary').forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        gsap.to(button, {
+            scale: 1.08,
+            boxShadow: "0 20px 40px rgba(236, 164, 19, 0.3)",
+            duration: 0.3
+        });
+        
+        // Effet de lumière pulsante
+        gsap.to(button, {
+            keyframes: {
+                "0%": { boxShadow: "0 0 0 rgba(236, 164, 19, 0)" },
+                "50%": { boxShadow: "0 0 30px rgba(236, 164, 19, 0.6)" },
+                "100%": { boxShadow: "0 0 0 rgba(236, 164, 19, 0)" }
+            },
+            duration: 1,
+            repeat: -1
+        });
+    });
+    
+    button.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(button, "boxShadow");
+        gsap.to(button, {
+            scale: 1,
+            boxShadow: "none",
+            duration: 0.3
+        });
+    });
+});
+
+// Animation du logo Vanguard
+const vanguardLogo = document.querySelector('.size-8.text-primary');
+if (vanguardLogo) {
+    gsap.to(vanguardLogo, {
+        rotation: 360,
+        duration: 20,
+        repeat: -1,
+        ease: "none"
+    });
+    
+    vanguardLogo.addEventListener('mouseenter', () => {
+        gsap.to(vanguardLogo, {
+            scale: 1.2,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    vanguardLogo.addEventListener('mouseleave', () => {
+        gsap.to(vanguardLogo, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+}
+
+// Animation des liens de navigation
+document.querySelectorAll('a.text-platinum\\/70').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        gsap.to(link, {
+            y: -3,
+            color: "#eca413",
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    link.addEventListener('mouseleave', () => {
+        gsap.to(link, {
+            y: 0,
+            color: "rgba(229, 229, 229, 0.7)",
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+});
+
+// Animation du lien "Full Catalog"
+const fullCatalogLink = document.querySelector('a.text-primary.text-xs');
+if (fullCatalogLink) {
+    fullCatalogLink.addEventListener('mouseenter', () => {
+        gsap.to(fullCatalogLink.querySelector('.material-symbols-outlined'), {
+            x: 10,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    fullCatalogLink.addEventListener('mouseleave', () => {
+        gsap.to(fullCatalogLink.querySelector('.material-symbols-outlined'), {
+            x: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+}
+
+// Animation des cartes d'écosystème au hover
+document.querySelectorAll('.flex.flex-col.gap-6.rounded-lg').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        const icon = card.querySelector('.material-symbols-outlined');
+        gsap.to(icon, {
+            y: -10,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+        
+        gsap.to(card, {
+            boxShadow: "0 20px 60px rgba(236, 164, 19, 0.1)",
+            duration: 0.4
+        });
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        const icon = card.querySelector('.material-symbols-outlined');
+        gsap.to(icon, {
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+        
+        gsap.to(card, {
+            boxShadow: "none",
+            duration: 0.4
+        });
+    });
+});
+
+// Animation du footer
+gsap.from("footer > div", {
+    scrollTrigger: {
+        trigger: "footer",
+        start: "top 95%"
+    },
+    y: 30,
+    opacity: 0,
+    stagger: 0.2,
+    duration: 1,
+    ease: "power3.out"
+});
+
+// Animation de la ligne de séparation
+gsap.from(".h-px.w-20", {
+    scrollTrigger: {
+        trigger: "#ecosystem",
+        start: "top 80%"
+    },
+    scaleX: 0,
+    duration: 1.5,
+    ease: "power3.out"
+});
+</script>
 </body></html>
