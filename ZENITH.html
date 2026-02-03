@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -39,6 +38,7 @@
         body {
             background-color: #0a0a0a;
             color: #E5E5E5;
+            scroll-behavior: smooth;
         }
         .blueprint-grid {
             background-size: 40px 40px;
@@ -46,6 +46,19 @@
         }
         .platinum-text {
             color: #E5E5E5;
+        }
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        button, a, .group, input[type="submit"] {
+            cursor: pointer;
+        }
+        img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        img.loaded {
+            opacity: 1;
         }
     </style>
 </head>
@@ -69,7 +82,7 @@
 </div>
 </header>
 <!-- HeroSection -->
-<section class="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden">
+<section class="hero-section relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden">
 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-obsidian to-obsidian z-10"></div>
 <div class="absolute inset-0 opacity-40 grayscale" data-alt="Deep black luxury car silhouette in shadows" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0eZtbv2GQ_V1mzFOEV1ix-W2h3LyjvbmRrwBTDs5uWqj-U6wm4KyYgIwN8rlSO9G7hnjBo5vOwjTMHmAF3szJJ4EmjASKLXHSPVvJQfWiWdrHzCUDXtW2uOzb3G_m6tPzfT-Y5unEjZ0OiTtMbmiar5uP_xyiLNXkCysIRYiGlA1oTYr6hHj6ZvndKzm9zDJgqRUE7JctirtbZY2DQNPUdVh90rtDdFv-za3d3M01Ws4W9u01tfjdJuH7-_zOLWBX1A0Pdz1sWNQ"); background-size: cover; background-position: center;'></div>
 <div class="relative z-20 text-center max-w-5xl mx-auto">
@@ -216,4 +229,163 @@
 </div>
 </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+// GSAP Animations pour Zenith
+gsap.registerPlugin(ScrollTrigger);
+
+// Préchargement d'images
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        const tempImg = new Image();
+        tempImg.src = img.src;
+        tempImg.onload = () => {
+            img.classList.add('loaded');
+        };
+    });
+});
+
+// Animation du logo au chargement
+gsap.from("header .material-symbols-outlined, header h2", {
+    duration: 1.2,
+    y: -50,
+    opacity: 0,
+    stagger: 0.2,
+    ease: "power3.out"
+});
+
+// Animation du hero
+gsap.from(".hero-section h1, .hero-section p, .hero-section button", {
+    duration: 1.5,
+    y: 80,
+    opacity: 0,
+    stagger: 0.3,
+    ease: "power3.out",
+    delay: 0.5
+});
+
+// Animation des sections au scroll
+gsap.utils.toArray("section").forEach(section => {
+    gsap.from(section, {
+        scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power2.out"
+    });
+});
+
+// Animation des logos partenaires
+gsap.from(".grid.grid-cols-1 img", {
+    scrollTrigger: {
+        trigger: ".py-24",
+        start: "top 70%"
+    },
+    scale: 0.8,
+    opacity: 0,
+    duration: 1.2,
+    stagger: 0.3,
+    ease: "back.out(1.7)"
+});
+
+// Animation hover améliorée pour les cartes
+document.querySelectorAll('.group').forEach(card => {
+    card.addEventListener('mouseenter', (e) => {
+        gsap.to(card, {
+            scale: 1.02,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+    });
+    
+    card.addEventListener('mouseleave', (e) => {
+        gsap.to(card, {
+            scale: 1,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+    });
+});
+
+// Animation du bouton Initiate
+const initiateBtn = document.querySelector('button.bg-primary');
+if (initiateBtn) {
+    initiateBtn.addEventListener('mouseenter', () => {
+        gsap.to(initiateBtn, {
+            scale: 1.05,
+            boxShadow: "0 10px 30px rgba(0, 96, 107, 0.4)",
+            duration: 0.3
+        });
+    });
+    
+    initiateBtn.addEventListener('mouseleave', () => {
+        gsap.to(initiateBtn, {
+            scale: 1,
+            boxShadow: "none",
+            duration: 0.3
+        });
+    });
+}
+
+// Animation de la barre de progression
+gsap.to(".h-1 .absolute", {
+    scrollTrigger: {
+        trigger: ".border.border-teal-glow",
+        start: "top 80%",
+        scrub: true
+    },
+    width: "100%",
+    duration: 2
+});
+
+// Parallax pour l'image hero
+gsap.to(".absolute.inset-0.opacity-40", {
+    scrollTrigger: {
+        trigger: ".relative.min-h-screen",
+        scrub: true
+    },
+    scale: 1.1,
+    duration: 2
+});
+
+// Animation des icônes au hover
+document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+    icon.addEventListener('mouseenter', () => {
+        gsap.to(icon, {
+            scale: 1.1,
+            rotation: 10,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    icon.addEventListener('mouseleave', () => {
+        gsap.to(icon, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+});
+
+// Animation du footer
+gsap.from(".mt-32", {
+    scrollTrigger: {
+        trigger: ".py-32.bg-obsidian",
+        start: "top 80%"
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out"
+});
+</script>
 </body></html>
