@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -45,6 +44,22 @@
         }
         .gradient-bottom {
             background: linear-gradient(to top, #0a080d 0%, rgba(10, 8, 13, 0) 100%);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        button, a, .group, input[type="submit"] {
+            cursor: pointer;
+        }
+        img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        img.loaded {
+            opacity: 1;
         }
     </style>
 </head>
@@ -200,4 +215,222 @@
 <div class="hidden" data-location="Saint-Tropez, France" style="https://lh3.googleusercontent.com/aida-public/AB6AXuBvTeIW2cYqD2MSJrFGnnJjo9qJAjSCswUdCfViPRygv4EOX0YchnCdu0f-3SD2-RlPaX8C3D3qd17LhsUJluR7EKZYHZnRju9A_oMjibfwKGVJBc2r2wALJvoT24R-PyU5fMjrhkcgNmiWiVsvTewqo8ECDMamAFzIkL7qlt99G249Wddsh5drqVzEtvKLs0BVjSQVuMDUjzUH4ieDQuqWcoufsfI5HSCGssyccJiJ5IwYZ6sfhkRyToVr164Xcq2V46854BDWzkMC"></div>
 <div class="hidden" data-location="St. Moritz, Switzerland" style="https://lh3.googleusercontent.com/aida-public/AB6AXuADqaeexZ3ToeLGM2ZtfKTB0M1sUIs2FpaVy0gXBRRhMtaJjb35d9GvtE1QVrrKa53Gl6q4OhaL0JAOd7rgjyo4a09gzpKHSt97g0H3D6n5He01gNZC_tTTzOBA0JUSSLxOgEzpKUHWYqW8pUuouMA5hkqDJ-8YdD0xONGtnYJvdJetAWaMP-XpuekfTAbfgoP5g4-K-QR6YUfiv8IQ_B1OOOSSkTiFVpa_PZWd4QcuBJmwf8x6_RCQcAq16b43mF2f9mnygDfgrP3H"></div>
 <div class="hidden" data-location="Paris, France" style="https://lh3.googleusercontent.com/aida-public/AB6AXuBWd3O0Edlh3zto4XUL2h9zTT7gwNkCDTxdN98An7t3IYfnahGrS240Lg0Y2VMCSWRZ0PAFWx9-nP6rMatl_5IM0aTs43rUFZ7xeOdKXmu0LfOLI7vA2Lhq2Hwz8mwqQCxtJP8K4W2G0WCsprUyhZmXf1_DaD8iIsOyz3-ZFrTyjxVkD7sBlZSlf58VW3x2FUU04v1-2iYcqzgR7Vlo3992OGYBT7tJ_7nZvnPL1kAspGibeBEWJaa1fg-DfHCf7WCoa-tS8EyzPXhu"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Préchargement d'images
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        const tempImg = new Image();
+        tempImg.src = img.src;
+        tempImg.onload = () => {
+            img.classList.add('loaded');
+        };
+    });
+});
+
+// Animation du header
+gsap.from("header > div, nav, .size-8", {
+    duration: 1.5,
+    y: -30,
+    opacity: 0,
+    stagger: 0.2,
+    ease: "power3.out"
+});
+
+// Animation split du texte hero
+gsap.from("h1 span", {
+    duration: 1.8,
+    y: 100,
+    opacity: 0,
+    stagger: 0.3,
+    ease: "power4.out",
+    delay: 0.5
+});
+
+// Animation de la description
+gsap.from(".border-l", {
+    duration: 1.5,
+    x: -50,
+    opacity: 0,
+    delay: 1.2,
+    ease: "power3.out"
+});
+
+// Animation des éléments de collection
+gsap.utils.toArray(".group.cursor-pointer").forEach((item, i) => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        x: -100,
+        opacity: 0,
+        duration: 1,
+        delay: i * 0.1,
+        ease: "power3.out"
+    });
+});
+
+// Animation du texte éthos
+gsap.from(".relative.z-10", {
+    scrollTrigger: {
+        trigger: ".relative.h-\\[60vh\\]",
+        start: "top 80%"
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power2.out"
+});
+
+// Effet de révélaton sur le fond PRIVÉ
+const ethosSection = document.querySelector(".relative.h-\\[60vh\\]");
+if (ethosSection) {
+    gsap.to(".text-\\[20rem\\]", {
+        scrollTrigger: {
+            trigger: ethosSection,
+            scrub: true
+        },
+        scale: 1.2,
+        opacity: 0.15,
+        duration: 2
+    });
+}
+
+// Animation du footer
+gsap.from("footer > div", {
+    scrollTrigger: {
+        trigger: "footer",
+        start: "top 90%"
+    },
+    y: 50,
+    opacity: 0,
+    stagger: 0.3,
+    duration: 1.2,
+    ease: "power3.out"
+});
+
+// Effet de parallax sur l'image hero
+gsap.to(".bg-cover", {
+    scrollTrigger: {
+        trigger: ".relative.h-screen",
+        scrub: true
+    },
+    scale: 1.1,
+    duration: 3
+});
+
+// Animation hover améliorée pour les liens de collection
+document.querySelectorAll('.group.cursor-pointer').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const icon = item.querySelector('.material-symbols-outlined');
+        gsap.to(icon, {
+            x: 5,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+        
+        // Animation du numéro
+        const number = item.querySelector('span.text-\\[10px\\]');
+        gsap.to(number, {
+            scale: 1.2,
+            color: "#ffffff",
+            duration: 0.3
+        });
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        const icon = item.querySelector('.material-symbols-outlined');
+        gsap.to(icon, {
+            x: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+        
+        const number = item.querySelector('span.text-\\[10px\\]');
+        gsap.to(number, {
+            scale: 1,
+            color: "#6614b8",
+            duration: 0.3
+        });
+    });
+});
+
+// Animation de la ligne verticale
+gsap.to(".w-\\[1px\\].h-32", {
+    scrollTrigger: {
+        trigger: ".absolute.right-12",
+        start: "top 70%",
+        scrub: true
+    },
+    height: "200px",
+    duration: 2
+});
+
+// Animation du logo
+const logo = document.querySelector('.group.cursor-pointer');
+if (logo) {
+    logo.addEventListener('mouseenter', () => {
+        gsap.to(logo.querySelector('svg'), {
+            rotation: 90,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+        gsap.to(logo.querySelector('svg'), {
+            rotation: 0,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+    });
+}
+
+// Animation du bouton "Begin the Journey"
+const beginButton = document.querySelector('.mt-8.flex.items-center');
+if (beginButton) {
+    beginButton.addEventListener('mouseenter', () => {
+        gsap.to(beginButton.querySelector('.h-\\[1px\\]'), {
+            width: "120px",
+            duration: 0.5,
+            ease: "power2.out"
+        });
+    });
+    
+    beginButton.addEventListener('mouseleave', () => {
+        gsap.to(beginButton.querySelector('.h-\\[1px\\]'), {
+            width: "48px",
+            duration: 0.5,
+            ease: "power2.out"
+        });
+    });
+}
+
+// Animation du lien de consultation footer
+const consultationLink = document.querySelector('.order-1.md\\:order-2.group');
+if (consultationLink) {
+    consultationLink.addEventListener('mouseenter', () => {
+        gsap.to(consultationLink.querySelector('h4'), {
+            y: -5,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    consultationLink.addEventListener('mouseleave', () => {
+        gsap.to(consultationLink.querySelector('h4'), {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+}
+</script>
 </body></html>
