@@ -369,3 +369,105 @@ gsap.to(".w-px.h-24", {
     },
     height: "150px",
     duration: 2
+});
+
+// Animation du logo
+const logo = document.querySelector('.flex.items-center.gap-3');
+if (logo) {
+    logo.addEventListener('mouseenter', () => {
+        gsap.to(logo.querySelector('svg'), {
+            rotation: 180,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+        
+        gsap.to(logo.querySelector('h1'), {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+        gsap.to(logo.querySelector('svg'), {
+            rotation: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+        
+        gsap.to(logo.querySelector('h1'), {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+}
+
+// Animation des liens de navigation
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        gsap.to(link, {
+            y: -3,
+            color: "#c5a059",
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    link.addEventListener('mouseleave', () => {
+        gsap.to(link, {
+            y: 0,
+            color: "#fdfbf7",
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+});
+
+// Animation du blob lumineux CTA
+const ctaSection = document.querySelector(".relative.bg-background-dark.py-32");
+if (ctaSection) {
+    gsap.to(".absolute.top-0.right-0", {
+        scrollTrigger: {
+            trigger: ctaSection,
+            scrub: true
+        },
+        x: -100,
+        y: 100,
+        scale: 1.2,
+        duration: 3
+    });
+}
+
+// Animation des indicateurs de confiance au hover
+document.querySelectorAll('.flex.flex-col.gap-1').forEach(indicator => {
+    indicator.addEventListener('mouseenter', () => {
+        gsap.to(indicator.querySelector('span.text-white'), {
+            scale: 1.1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+        
+        gsap.to(indicator.querySelector('span.text-gold'), {
+            y: -3,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+    
+    indicator.addEventListener('mouseleave', () => {
+        gsap.to(indicator.querySelector('span.text-white'), {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+        
+        gsap.to(indicator.querySelector('span.text-gold'), {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+});
+</script>
+</body></html>
