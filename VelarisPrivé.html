@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Velaris Privé | Avant-Garde Minimalist</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Velaris Privé | Avant-Garde Minimalist</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -15,7 +22,7 @@
                     colors: {
                         "primary": "#6614b8",
                         "background-light": "#f7f6f8",
-                        "background-dark": "#0a080d", // Darker for more mystery
+                        "background-dark": "#0a080d",
                         "alabaster": "#f2f0ea",
                     },
                     fontFamily: {
@@ -31,7 +38,7 @@
             },
         }
     </script>
-<style>
+    <style>
         .vertical-text {
             writing-mode: vertical-rl;
             text-orientation: mixed;
@@ -45,392 +52,452 @@
         .gradient-bottom {
             background: linear-gradient(to top, #0a080d 0%, rgba(10, 8, 13, 0) 100%);
         }
-        html {
-            scroll-behavior: smooth;
+        .splitting-text {
+            display: inline-block;
         }
-        * {
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        button, a, .group, input[type="submit"] {
-            cursor: pointer;
-        }
-        img {
+        .char {
+            display: inline-block;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transform: translateY(100%);
         }
-        img.loaded {
-            opacity: 1;
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .magnetic-btn:hover {
+            transform: scale(1.05);
+        }
+        .image-mask {
+            -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%);
+            mask-image: linear-gradient(to right, black 0%, transparent 100%);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .gradient-border {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(#0a080d, #0a080d) padding-box,
+                        linear-gradient(45deg, #6614b8, transparent) border-box;
+        }
+        .reveal-mask {
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary selection:text-white">
-<!-- Subtle Navigation -->
-<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-10 py-8 mix-blend-difference">
-<div class="flex items-center gap-2 group cursor-pointer">
-<div class="size-6 text-primary">
-<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z"></path>
-</svg>
-</div>
-<h2 class="text-alabaster text-sm font-light tracking-[0.4em] uppercase">Velaris Privé</h2>
-</div>
-<nav class="hidden md:flex items-center gap-12">
-<a class="text-[10px] tracking-[0.3em] uppercase opacity-60 hover:opacity-100 transition-opacity" href="#">Philosophy</a>
-<a class="text-[10px] tracking-[0.3em] uppercase opacity-60 hover:opacity-100 transition-opacity" href="#">The Collection</a>
-<a class="text-[10px] tracking-[0.3em] uppercase opacity-60 hover:opacity-100 transition-opacity" href="#">Services</a>
-</nav>
-<div class="size-8 rounded-full border border-white/10 overflow-hidden flex items-center justify-center bg-white/5">
-<span class="material-symbols-outlined text-xs">menu</span>
-</div>
-</header>
-<main class="relative min-h-screen flex flex-col">
-<!-- Avant-Garde Hero Section -->
-<section class="relative h-screen w-full overflow-hidden flex items-center">
-<!-- Background Image with Asymmetric Veil -->
-<div class="absolute inset-0 z-0">
-<div class="absolute inset-0 bg-cover bg-center" data-alt="Cinematic wide shot of a misty lake in the Italian Alps at dawn" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDS5xdchMTGqi4-2thg0TDDu8PIK8hA1OA7XoQyaR9GmmzhCoE6kddJefxr2djDyJPivXGUtFEhythRy_sWejcXNGgx1-1N4Do5ZZRpAaLct7t4yvOLpiPr0JhGt6BTsXWjAPGbeiN1CDbe2l5rBS2gAnlZeTgs6B227pVSQ7US3b0NRfWiIxO_cehss2cFE_uAiFj6DgGfvvYaYt28mXKaq8NLHkvWAOiw1xqsBhZfI7-BFf-_fZLSotV6gD-BDSleHWTS2v3ulSPx");'>
-</div>
-<div class="absolute inset-0 gradient-veil"></div>
-<div class="absolute inset-0 gradient-bottom"></div>
-<div class="absolute inset-0 bg-background-dark/20"></div>
-</div>
-<!-- Split Typography -->
-<div class="relative z-10 w-full px-10 md:px-24 flex flex-col items-start">
-<div class="max-w-4xl">
-<h1 class="text-alabaster text-6xl md:text-8xl font-extralight tracking-tight leading-[0.9]">
-<span class="block ml-0">The</span>
-<span class="block ml-12 md:ml-24 text-primary italic font-light mt-2">Sovereignty</span>
-<span class="block ml-4 md:ml-8 mt-2">of Travel</span>
-</h1>
-</div>
-<div class="mt-16 max-w-sm ml-4 md:ml-8 border-l border-primary/40 pl-8">
-<p class="text-alabaster/60 text-sm font-light leading-relaxed tracking-wide">
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary selection:text-white overflow-x-hidden">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor fixed w-8 h-8 rounded-full border border-primary/30 pointer-events-none z-[9999] mix-blend-difference"></div>
+    <div class="custom-cursor-dot fixed w-2 h-2 rounded-full bg-primary pointer-events-none z-[10000] mix-blend-difference"></div>
+    
+    <!-- Noise Overlay -->
+    <div class="noise-overlay fixed inset-0 pointer-events-none z-40 opacity-[0.02]"></div>
+    
+    <!-- Subtle Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-10 py-8 mix-blend-difference">
+        <div class="flex items-center gap-2 group cursor-pointer magnetic-btn">
+            <div class="size-6 text-primary">
+                <svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z"></path>
+                </svg>
+            </div>
+            <h2 class="text-alabaster text-sm font-light tracking-[0.4em] uppercase">Velaris Privé</h2>
+        </div>
+        <nav class="hidden md:flex items-center gap-12">
+            <a class="text-[10px] tracking-[0.3em] uppercase opacity-60 hover:opacity-100 transition-opacity stagger-item" href="#">Philosophy</a>
+            <a class="text-[10px] tracking-[0.3em] uppercase opacity-60 hover:opacity-100 transition-opacity stagger-item" href="#">The Collection</a>
+            <a class="text-[10px] tracking-[0.3em] uppercase opacity-60 hover:opacity-100 transition-opacity stagger-item" href="#">Services</a>
+        </nav>
+        <div class="size-8 rounded-full border border-white/10 overflow-hidden flex items-center justify-center bg-white/5 magnetic-btn">
+            <span class="material-symbols-outlined text-xs">menu</span>
+        </div>
+    </header>
+
+    <main class="relative min-h-screen flex flex-col">
+        <!-- Avant-Garde Hero Section -->
+        <section class="relative h-screen w-full overflow-hidden flex items-center">
+            <!-- Background Image with Asymmetric Veil -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-cover bg-center parallax-layer" data-alt="Cinematic wide shot of a misty lake in the Italian Alps at dawn" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDS5xdchMTGqi4-2thg0TDDu8PIK8hA1OA7XoQyaR9GmmzhCoE6kddJefxr2djDyJPivXGUtFEhythRy_sWejcXNGgx1-1N4Do5ZZRpAaLct7t4yvOLpiPr0JhGt6BTsXWjAPGbeiN1CDbe2l5rBS2gAnlZeTgs6B227pVSQ7US3b0NRfWiIxO_cehss2cFE_uAiFj6DgGfvvYaYt28mXKaq8NLHkvWAOiw1xqsBhZfI7-BFf-_fZLSotV6gD-BDSleHWTS2v3ulSPx");'></div>
+                <div class="absolute inset-0 gradient-veil"></div>
+                <div class="absolute inset-0 gradient-bottom"></div>
+                <div class="absolute inset-0 bg-background-dark/20"></div>
+            </div>
+            
+            <!-- Split Typography -->
+            <div class="relative z-10 w-full px-10 md:px-24 flex flex-col items-start">
+                <div class="max-w-4xl">
+                    <h1 class="hero-text text-alabaster text-6xl md:text-8xl font-extralight tracking-tight leading-[0.9]">
+                        <span class="block ml-0 line-1">The</span>
+                        <span class="block ml-12 md:ml-24 text-primary italic font-light mt-2 line-2">Sovereignty</span>
+                        <span class="block ml-4 md:ml-8 mt-2 line-3">of Travel</span>
+                    </h1>
+                </div>
+                <div class="mt-16 max-w-sm ml-4 md:ml-8 border-l border-primary/40 pl-8 reveal-mask">
+                    <p class="text-alabaster/60 text-sm font-light leading-relaxed tracking-wide fade-in-text">
                         Experience the <span class="text-alabaster">Velar</span> concept—an invisible hand watching over every detail, ensuring absolute privacy in the world's most storied landscapes.
                     </p>
-<button class="mt-8 flex items-center gap-4 group">
-<span class="text-[10px] uppercase tracking-[0.3em] font-medium group-hover:text-primary transition-colors">Begin the Journey</span>
-<div class="h-[1px] w-12 bg-alabaster/30 group-hover:w-24 group-hover:bg-primary transition-all duration-500"></div>
-</button>
-</div>
-</div>
-<!-- Floating Vertical Element -->
-<div class="absolute right-12 bottom-24 hidden lg:flex flex-col items-center gap-8">
-<div class="vertical-text text-[10px] uppercase tracking-[0.5em] text-alabaster/30 font-light">
+                    <button class="mt-8 flex items-center gap-4 group magnetic-btn">
+                        <span class="text-[10px] uppercase tracking-[0.3em] font-medium group-hover:text-primary transition-colors">Begin the Journey</span>
+                        <div class="h-[1px] w-12 bg-alabaster/30 group-hover:w-24 group-hover:bg-primary transition-all duration-500"></div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Floating Vertical Element -->
+            <div class="absolute right-12 bottom-24 hidden lg:flex flex-col items-center gap-8 floating-element">
+                <div class="vertical-text text-[10px] uppercase tracking-[0.5em] text-alabaster/30 font-light">
                     Est. 2012 — London • Paris • St. Moritz
                 </div>
-<div class="w-[1px] h-32 bg-gradient-to-t from-primary/60 to-transparent"></div>
-</div>
-</section>
-<!-- The Collection - Vertical List Section -->
-<section class="relative bg-background-dark py-32 px-10 md:px-24 overflow-hidden">
-<div class="flex flex-col md:flex-row gap-20">
-<div class="md:w-1/3">
-<h2 class="text-alabaster text-4xl font-extralight tracking-tighter">The Collection</h2>
-<p class="text-alabaster/40 mt-6 text-sm leading-relaxed max-w-xs">
+                <div class="w-[1px] h-32 bg-gradient-to-t from-primary/60 to-transparent scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- The Collection - Vertical List Section -->
+        <section class="relative bg-background-dark py-32 px-10 md:px-24 overflow-hidden">
+            <div class="flex flex-col md:flex-row gap-20">
+                <div class="md:w-1/3">
+                    <h2 class="text-alabaster text-4xl font-extralight tracking-tighter fade-in-left">The Collection</h2>
+                    <p class="text-alabaster/40 mt-6 text-sm leading-relaxed max-w-xs fade-in-left">
                         A strictly private portfolio of residences and experiences, curated for those who value the luxury of silence.
                     </p>
-</div>
-<div class="md:w-2/3 flex flex-col gap-16">
-<!-- Text Grid Styled as List -->
-<div class="group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors">
-<span class="text-[10px] text-primary font-bold tracking-widest">01</span>
-<div>
-<h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">The Swiss Alp Hideaway</h3>
-<p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">St. Moritz, Switzerland</p>
-</div>
-<div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined font-thin">north_east</span>
-</div>
-</div>
-<div class="group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors">
-<span class="text-[10px] text-primary font-bold tracking-widest">02</span>
-<div>
-<h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">The Riviera Sanctuary</h3>
-<p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">Saint-Tropez, France</p>
-</div>
-<div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined font-thin">north_east</span>
-</div>
-</div>
-<div class="group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors">
-<span class="text-[10px] text-primary font-bold tracking-widest">03</span>
-<div>
-<h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">Parisian Penthouse</h3>
-<p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">Place Vendôme, France</p>
-</div>
-<div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined font-thin">north_east</span>
-</div>
-</div>
-<div class="group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors">
-<span class="text-[10px] text-primary font-bold tracking-widest">04</span>
-<div>
-<h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">Amalfi Coastal Retreat</h3>
-<p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">Positano, Italy</p>
-</div>
-<div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined font-thin">north_east</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Ethos Section -->
-<section class="relative h-[60vh] bg-background-dark flex items-center justify-center text-center px-4 overflow-hidden">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 pointer-events-none">
-<div class="w-full h-full flex items-center justify-center">
-<span class="text-[20rem] font-black text-primary/20 select-none">PRIVÉ</span>
-</div>
-</div>
-<div class="relative z-10 max-w-2xl">
-<p class="text-alabaster text-lg md:text-xl font-extralight leading-relaxed tracking-wide italic">
+                </div>
+                <div class="md:w-2/3 flex flex-col gap-16">
+                    <!-- Text Grid Styled as List -->
+                    <div class="collection-item group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors gradient-border">
+                        <span class="text-[10px] text-primary font-bold tracking-widest">01</span>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">The Swiss Alp Hideaway</h3>
+                            <p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">St. Moritz, Switzerland</p>
+                        </div>
+                        <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined font-thin">north_east</span>
+                        </div>
+                    </div>
+                    <div class="collection-item group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors gradient-border">
+                        <span class="text-[10px] text-primary font-bold tracking-widest">02</span>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">The Riviera Sanctuary</h3>
+                            <p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">Saint-Tropez, France</p>
+                        </div>
+                        <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined font-thin">north_east</span>
+                        </div>
+                    </div>
+                    <div class="collection-item group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors gradient-border">
+                        <span class="text-[10px] text-primary font-bold tracking-widest">03</span>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">Parisian Penthouse</h3>
+                            <p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">Place Vendôme, France</p>
+                        </div>
+                        <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined font-thin">north_east</span>
+                        </div>
+                    </div>
+                    <div class="collection-item group cursor-pointer flex items-baseline gap-10 border-b border-white/5 pb-10 hover:border-primary/40 transition-colors gradient-border">
+                        <span class="text-[10px] text-primary font-bold tracking-widest">04</span>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-light text-alabaster tracking-wide group-hover:translate-x-2 transition-transform duration-500">Amalfi Coastal Retreat</h3>
+                            <p class="text-xs uppercase tracking-[0.2em] text-alabaster/30 mt-2">Positano, Italy</p>
+                        </div>
+                        <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined font-thin">north_east</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ethos Section -->
+        <section class="relative h-[60vh] bg-background-dark flex items-center justify-center text-center px-4 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 pointer-events-none">
+                <div class="w-full h-full flex items-center justify-center floating-element">
+                    <span class="text-[20rem] font-black text-primary/20 select-none rotate-animation">PRIVÉ</span>
+                </div>
+            </div>
+            <div class="relative z-10 max-w-2xl">
+                <p class="text-alabaster text-lg md:text-xl font-extralight leading-relaxed tracking-wide italic fade-in-quote">
                     "Our presence is felt, not seen. We curate experiences that redefine the boundaries of luxury and privacy across Europe's most storied landscapes."
                 </p>
-<div class="mt-12 flex justify-center">
-<div class="w-10 h-[1px] bg-primary"></div>
-</div>
-</div>
-</section>
-<!-- Tucked Away Footer / Consultation -->
-<footer class="relative bg-background-dark pt-10 pb-20 px-10 md:px-24 flex flex-col md:flex-row items-end justify-between gap-10">
-<div class="flex flex-col gap-4 order-2 md:order-1">
-<div class="flex items-center gap-6 opacity-40">
-<a class="text-[9px] uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Instagram</a>
-<a class="text-[9px] uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Journal</a>
-<a class="text-[9px] uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Legal</a>
-</div>
-<p class="text-[9px] text-alabaster/20 tracking-widest uppercase">© 2024 Velaris Privé. All rights reserved.</p>
-</div>
-<div class="order-1 md:order-2 group">
-<a class="flex flex-col items-end gap-2" href="#">
-<span class="text-[10px] uppercase tracking-[0.4em] text-alabaster/60 group-hover:text-alabaster transition-colors">Contact our concierge</span>
-<h4 class="text-xl font-light text-alabaster border-b border-white/10 pb-1 group-hover:border-primary transition-colors tracking-tighter">
+                <div class="mt-12 flex justify-center">
+                    <div class="w-10 h-[1px] bg-primary line-expand"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tucked Away Footer / Consultation -->
+        <footer class="relative bg-background-dark pt-10 pb-20 px-10 md:px-24 flex flex-col md:flex-row items-end justify-between gap-10">
+            <div class="flex flex-col gap-4 order-2 md:order-1">
+                <div class="flex items-center gap-6 opacity-40">
+                    <a class="text-[9px] uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Instagram</a>
+                    <a class="text-[9px] uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Journal</a>
+                    <a class="text-[9px] uppercase tracking-[0.2em] hover:text-primary transition-colors" href="#">Legal</a>
+                </div>
+                <p class="text-[9px] text-alabaster/20 tracking-widest uppercase">© 2024 Velaris Privé. All rights reserved.</p>
+            </div>
+            <div class="order-1 md:order-2 group magnetic-btn">
+                <a class="flex flex-col items-end gap-2" href="#">
+                    <span class="text-[10px] uppercase tracking-[0.4em] text-alabaster/60 group-hover:text-alabaster transition-colors">Contact our concierge</span>
+                    <h4 class="text-xl font-light text-alabaster border-b border-white/10 pb-1 group-hover:border-primary transition-colors tracking-tighter">
                         Request Consultation
                     </h4>
-</a>
-</div>
-</footer>
-</main>
-<!-- Map Decoration (Hidden but for data-location requirement) -->
-<div class="hidden" data-location="Saint-Tropez, France" style="https://lh3.googleusercontent.com/aida-public/AB6AXuBvTeIW2cYqD2MSJrFGnnJjo9qJAjSCswUdCfViPRygv4EOX0YchnCdu0f-3SD2-RlPaX8C3D3qd17LhsUJluR7EKZYHZnRju9A_oMjibfwKGVJBc2r2wALJvoT24R-PyU5fMjrhkcgNmiWiVsvTewqo8ECDMamAFzIkL7qlt99G249Wddsh5drqVzEtvKLs0BVjSQVuMDUjzUH4ieDQuqWcoufsfI5HSCGssyccJiJ5IwYZ6sfhkRyToVr164Xcq2V46854BDWzkMC"></div>
-<div class="hidden" data-location="St. Moritz, Switzerland" style="https://lh3.googleusercontent.com/aida-public/AB6AXuADqaeexZ3ToeLGM2ZtfKTB0M1sUIs2FpaVy0gXBRRhMtaJjb35d9GvtE1QVrrKa53Gl6q4OhaL0JAOd7rgjyo4a09gzpKHSt97g0H3D6n5He01gNZC_tTTzOBA0JUSSLxOgEzpKUHWYqW8pUuouMA5hkqDJ-8YdD0xONGtnYJvdJetAWaMP-XpuekfTAbfgoP5g4-K-QR6YUfiv8IQ_B1OOOSSkTiFVpa_PZWd4QcuBJmwf8x6_RCQcAq16b43mF2f9mnygDfgrP3H"></div>
-<div class="hidden" data-location="Paris, France" style="https://lh3.googleusercontent.com/aida-public/AB6AXuBWd3O0Edlh3zto4XUL2h9zTT7gwNkCDTxdN98An7t3IYfnahGrS240Lg0Y2VMCSWRZ0PAFWx9-nP6rMatl_5IM0aTs43rUFZ7xeOdKXmu0LfOLI7vA2Lhq2Hwz8mwqQCxtJP8K4W2G0WCsprUyhZmXf1_DaD8iIsOyz3-ZFrTyjxVkD7sBlZSlf58VW3x2FUU04v1-2iYcqzgR7Vlo3992OGYBT7tJ_7nZvnPL1kAspGibeBEWJaa1fg-DfHCf7WCoa-tS8EyzPXhu"></div>
+                </a>
+            </div>
+        </footer>
+    </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-
-// Préchargement d'images
-document.addEventListener("DOMContentLoaded", function() {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        const tempImg = new Image();
-        tempImg.src = img.src;
-        tempImg.onload = () => {
-            img.classList.add('loaded');
-        };
-    });
-});
-
-// Animation du header
-gsap.from("header > div, nav, .size-8", {
-    duration: 1.5,
-    y: -30,
-    opacity: 0,
-    stagger: 0.2,
-    ease: "power3.out"
-});
-
-// Animation split du texte hero
-gsap.from("h1 span", {
-    duration: 1.8,
-    y: 100,
-    opacity: 0,
-    stagger: 0.3,
-    ease: "power4.out",
-    delay: 0.5
-});
-
-// Animation de la description
-gsap.from(".border-l", {
-    duration: 1.5,
-    x: -50,
-    opacity: 0,
-    delay: 1.2,
-    ease: "power3.out"
-});
-
-// Animation des éléments de collection
-gsap.utils.toArray(".group.cursor-pointer").forEach((item, i) => {
-    gsap.from(item, {
-        scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-        },
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        delay: i * 0.1,
-        ease: "power3.out"
-    });
-});
-
-// Animation du texte éthos
-gsap.from(".relative.z-10", {
-    scrollTrigger: {
-        trigger: ".relative.h-\\[60vh\\]",
-        start: "top 80%"
-    },
-    y: 50,
-    opacity: 0,
-    duration: 1.5,
-    ease: "power2.out"
-});
-
-// Effet de révélaton sur le fond PRIVÉ
-const ethosSection = document.querySelector(".relative.h-\\[60vh\\]");
-if (ethosSection) {
-    gsap.to(".text-\\[20rem\\]", {
-        scrollTrigger: {
-            trigger: ethosSection,
-            scrub: true
-        },
-        scale: 1.2,
-        opacity: 0.15,
-        duration: 2
-    });
-}
-
-// Animation du footer
-gsap.from("footer > div", {
-    scrollTrigger: {
-        trigger: "footer",
-        start: "top 90%"
-    },
-    y: 50,
-    opacity: 0,
-    stagger: 0.3,
-    duration: 1.2,
-    ease: "power3.out"
-});
-
-// Effet de parallax sur l'image hero
-gsap.to(".bg-cover", {
-    scrollTrigger: {
-        trigger: ".relative.h-screen",
-        scrub: true
-    },
-    scale: 1.1,
-    duration: 3
-});
-
-// Animation hover améliorée pour les liens de collection
-document.querySelectorAll('.group.cursor-pointer').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        const icon = item.querySelector('.material-symbols-outlined');
-        gsap.to(icon, {
-            x: 5,
-            duration: 0.3,
-            ease: "power2.out"
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+        
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                duration: 0.4,
+                x: e.clientX - 16,
+                y: e.clientY - 16,
+                ease: "power3.out"
+            });
+            
+            gsap.to(cursorDot, {
+                duration: 0.1,
+                x: e.clientX - 4,
+                y: e.clientY - 4,
+                ease: "power3.out"
+            });
         });
         
-        // Animation du numéro
-        const number = item.querySelector('span.text-\\[10px\\]');
-        gsap.to(number, {
-            scale: 1.2,
-            color: "#ffffff",
-            duration: 0.3
-        });
-    });
-    
-    item.addEventListener('mouseleave', () => {
-        const icon = item.querySelector('.material-symbols-outlined');
-        gsap.to(icon, {
-            x: 0,
-            duration: 0.3,
-            ease: "power2.out"
+        // Magnetic buttons
+        document.querySelectorAll('.magnetic-btn').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                gsap.to(button, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                gsap.to(button, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
         });
         
-        const number = item.querySelector('span.text-\\[10px\\]');
-        gsap.to(number, {
-            scale: 1,
-            color: "#6614b8",
-            duration: 0.3
+        // Hero text animation with split text effect
+        const heroText = document.querySelector('.hero-text');
+        const lines = document.querySelectorAll('.line-1, .line-2, .line-3');
+        
+        lines.forEach((line, index) => {
+            const text = line.textContent;
+            line.innerHTML = text.split('').map(char => 
+                `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
+            ).join('');
+            
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroText,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            })
+            .to(line.querySelectorAll('.char'), {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.03,
+                delay: index * 0.3,
+                ease: "power3.out"
+            });
         });
-    });
-});
-
-// Animation de la ligne verticale
-gsap.to(".w-\\[1px\\].h-32", {
-    scrollTrigger: {
-        trigger: ".absolute.right-12",
-        start: "top 70%",
-        scrub: true
-    },
-    height: "200px",
-    duration: 2
-});
-
-// Animation du logo
-const logo = document.querySelector('.group.cursor-pointer');
-if (logo) {
-    logo.addEventListener('mouseenter', () => {
-        gsap.to(logo.querySelector('svg'), {
-            rotation: 90,
-            duration: 0.6,
-            ease: "power2.out"
+        
+        // Parallax effect for hero background
+        gsap.to('.parallax-layer', {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: '.parallax-layer',
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
         });
-    });
-    
-    logo.addEventListener('mouseleave', () => {
-        gsap.to(logo.querySelector('svg'), {
-            rotation: 0,
-            duration: 0.6,
-            ease: "power2.out"
+        
+        // Collection items animation
+        gsap.from('.collection-item', {
+            scrollTrigger: {
+                trigger: '.collection-item',
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
         });
-    });
-}
-
-// Animation du bouton "Begin the Journey"
-const beginButton = document.querySelector('.mt-8.flex.items-center');
-if (beginButton) {
-    beginButton.addEventListener('mouseenter', () => {
-        gsap.to(beginButton.querySelector('.h-\\[1px\\]'), {
-            width: "120px",
-            duration: 0.5,
-            ease: "power2.out"
+        
+        // Quote animation
+        gsap.from('.fade-in-quote', {
+            scrollTrigger: {
+                trigger: '.fade-in-quote',
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1.5,
+            ease: "power3.out"
         });
-    });
-    
-    beginButton.addEventListener('mouseleave', () => {
-        gsap.to(beginButton.querySelector('.h-\\[1px\\]'), {
-            width: "48px",
-            duration: 0.5,
-            ease: "power2.out"
+        
+        // Line expand animation
+        gsap.from('.line-expand', {
+            scrollTrigger: {
+                trigger: '.line-expand',
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+            },
+            scaleX: 0,
+            duration: 1.5,
+            ease: "power3.out"
         });
-    });
-}
-
-// Animation du lien de consultation footer
-const consultationLink = document.querySelector('.order-1.md\\:order-2.group');
-if (consultationLink) {
-    consultationLink.addEventListener('mouseenter', () => {
-        gsap.to(consultationLink.querySelector('h4'), {
-            y: -5,
-            duration: 0.3,
-            ease: "power2.out"
+        
+        // Fade in left animation
+        gsap.from('.fade-in-left', {
+            scrollTrigger: {
+                trigger: '.fade-in-left',
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            x: -50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
         });
-    });
-    
-    consultationLink.addEventListener('mouseleave', () => {
-        gsap.to(consultationLink.querySelector('h4'), {
-            y: 0,
-            duration: 0.3,
-            ease: "power2.out"
+        
+        // Fade in text animation
+        gsap.from('.fade-in-text', {
+            scrollTrigger: {
+                trigger: '.fade-in-text',
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            ease: "power3.out"
         });
-    });
-}
-</script>
-</body></html>
+        
+        // Navigation items stagger animation
+        gsap.from('.stagger-item', {
+            opacity: 0,
+            y: -20,
+            duration: 0.8,
+            stagger: 0.1,
+            delay: 0.5,
+            ease: "power3.out"
+        });
+        
+        // Rotating background text animation
+        gsap.to('.rotate-animation', {
+            rotation: 360,
+            duration: 40,
+            repeat: -1,
+            ease: "none"
+        });
+        
+        // Scroll line animation
+        gsap.to('.scroll-line', {
+            height: 0,
+            ease: "none",
+            scrollTrigger: {
+                trigger: '.scroll-line',
+                start: "top 100%",
+                end: "bottom 0%",
+                scrub: 1
+            }
+        });
+        
+        // Noise overlay animation
+        gsap.to('.noise-overlay', {
+            backgroundPosition: '0px 0px',
+            ease: "none",
+            scrollTrigger: {
+                trigger: '.noise-overlay',
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5
+            }
+        });
+        
+        // Initialize noise overlay
+        document.querySelector('.noise-overlay').style.backgroundImage = 
+            'url("data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%" height="100%" filter="url(%23noise)" opacity="0.1"/%3E%3C/svg%3E")';
+        
+        // Hover effects for collection items
+        document.querySelectorAll('.collection-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                gsap.to(item, {
+                    backgroundColor: 'rgba(102, 20, 184, 0.05)',
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, {
+                    backgroundColor: 'transparent',
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
+        
+        // Page load animation
+        gsap.from('body', {
+            opacity: 0,
+            duration: 1,
+            ease: "power2.inOut"
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    gsap.to(window, {
+                        duration: 1.5,
+                        scrollTo: {
+                            y: target,
+                            offsetY: 80
+                        },
+                        ease: "power3.inOut"
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
