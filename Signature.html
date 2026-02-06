@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Signature by IWG | Luxury Coworking</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- GSAP Library -->
+<!-- GSAP pour animations -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -42,38 +42,48 @@
         .hero-gradient {
             background: linear-gradient(to right, rgba(16, 22, 34, 0.9) 0%, rgba(16, 22, 34, 0.4) 50%, rgba(16, 22, 34, 0.2) 100%);
         }
-        .reveal-anim {
+        /* GSAP animation classes */
+        .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
         }
-        .reveal-stagger > * {
+        .fade-in-left {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateX(-30px);
         }
-        .float-anim {
-            animation: float 6s ease-in-out infinite;
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
         }
-        .scroll-indicator {
-            animation: scrollPulse 2s infinite;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        ::-webkit-scrollbar-track {
+            background: rgba(16, 22, 34, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5a059;
+            border-radius: 4px;
+        }
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-charcoal dark:text-cream">
 <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
 <!-- Header / Navigation -->
-<header class="fixed top-0 left-0 right-0 z-50 glass-nav reveal-anim">
+<header class="fixed top-0 left-0 right-0 z-50 glass-nav transform-gpu -translate-y-full opacity-0" id="main-header">
 <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
 <div class="flex items-center gap-3">
 <div class="text-gold">
-<svg class="w-8 h-8 logo-anim" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<svg class="w-8 h-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
 <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
 </svg>
 </div>
@@ -86,103 +96,109 @@
 <a class="text-xs uppercase tracking-widest text-cream hover:text-gold transition-colors nav-link" href="#">About</a>
 </nav>
 <div class="flex items-center gap-6">
-<a class="text-xs uppercase tracking-widest text-cream/70 hover:text-cream transition-colors" href="#">Member Login</a>
-<button class="btn-primary bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest transition-all">
+<a class="text-xs uppercase tracking-widest text-cream/70 hover:text-cream transition-colors nav-link" href="#">Member Login</a>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest transition-all btn-primary">
                         Inquire Now
                     </button>
 </div>
 </div>
 </header>
+
 <!-- Hero Section -->
 <main class="relative h-screen min-h-[700px] w-full flex items-center">
 <!-- Background Image with Overlay -->
 <div class="absolute inset-0 z-0">
-<div class="absolute inset-0 bg-cover bg-center" data-alt="Luxurious modern executive lounge with marble accents and floor to ceiling windows" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBC-kbPaLagLdbx1h4Jkf7p09UKcEsFRMwH8aKWXnYuqqFYKFZQ5fBaeFCA30uJ66ryIcbLXxoPBGC7B797ZV141ahko9SQthBjqXhMh2qYcEVn4mtqUATRXAjXSoq0LKllz2ilzhl1sPdbW3JdhLI-a1TXhLDmf4UrvU-uNVGEv4xfoc3F1D5umE4hoN8aBXkVorbklbLuMoVmXvm2TcT-MjvINzgnHhfUpQsA7x5ReDDdAL-PndYgQx1ugRIHXaurswkvzE2isopm');">
+<div class="absolute inset-0 bg-cover bg-center scale-in" id="hero-bg" data-alt="Luxurious modern executive lounge with marble accents and floor to ceiling windows" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBC-kbPaLagLdbx1h4Jkf7p09UKcEsFRMwH8aKWXnYuqqFYKFZQ5fBaeFCA30uJ66ryIcbLXxoPBGC7B797ZV141ahko9SQthBjqXhMh2qYcEVn4mtqUATRXAjXSoq0LKllz2ilzhl1sPdbW3JdhLI-a1TXhLDmf4UrvU-uNVGEv4xfoc3F1D5umE4hoN8aBXkVorbklbLuMoVmXvm2TcT-MjvINzgnHhfUpQsA7x5ReDDdAL-PndYgQx1ugRIHXaurswkvzE2isopm');">
 </div>
-<div class="absolute inset-0 hero-gradient"></div>
+<div class="absolute inset-0 hero-gradient" id="hero-gradient"></div>
 </div>
+
 <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full pt-20">
-<div class="max-w-2xl flex flex-col gap-8 hero-content">
+<div class="max-w-2xl flex flex-col gap-8">
 <div class="space-y-4">
-<span class="text-gold text-sm font-semibold tracking-[0.3em] uppercase block reveal-anim">Refined Professional Excellence</span>
-<h2 class="text-white text-5xl md:text-7xl font-extralight leading-tight tracking-tight reveal-anim">
-                            The World's Most <span class="italic font-normal gold-text">Exclusive</span> Workspaces.
+<span class="text-gold text-sm font-semibold tracking-[0.3em] uppercase block fade-in-left" id="hero-subtitle">Refined Professional Excellence</span>
+<h2 class="text-white text-5xl md:text-7xl font-extralight leading-tight tracking-tight fade-in-up" id="hero-title">
+                            The World's Most <span class="italic font-normal">Exclusive</span> Workspaces.
                         </h2>
-<p class="text-cream/80 text-lg md:text-xl font-light leading-relaxed max-w-xl reveal-anim">
+<p class="text-cream/80 text-lg md:text-xl font-light leading-relaxed max-w-xl fade-in-up" id="hero-desc">
                             Experience a new standard of professional luxury. Access 3,000+ premier locations worldwide, designed for those who demand excellence and discretion.
                         </p>
 </div>
-<div class="flex flex-wrap gap-5 pt-4 button-group">
-<button class="min-w-[180px] bg-primary hover:bg-primary/90 text-white h-14 px-8 rounded-lg font-bold text-sm uppercase tracking-widest transition-all shadow-xl shadow-primary/20 btn-primary">
+<div class="flex flex-wrap gap-5 pt-4">
+<button class="min-w-[180px] bg-primary hover:bg-primary/90 text-white h-14 px-8 rounded-lg font-bold text-sm uppercase tracking-widest transition-all shadow-xl shadow-primary/20 btn-primary fade-in-left" id="cta-primary">
                             Inquire Now
                         </button>
-<button class="min-w-[180px] border border-gold/50 hover:bg-gold/10 text-gold h-14 px-8 rounded-lg font-bold text-sm uppercase tracking-widest transition-all btn-secondary">
+<button class="min-w-[180px] border border-gold/50 hover:bg-gold/10 text-gold h-14 px-8 rounded-lg font-bold text-sm uppercase tracking-widest transition-all fade-in-right" id="cta-secondary">
                             Explore Locations
                         </button>
 </div>
 <!-- Trust Indicators -->
-<div class="flex items-center gap-12 mt-12 pt-12 border-t border-white/10 trust-indicators reveal-stagger">
-<div class="flex flex-col gap-1 trust-item">
+<div class="flex items-center gap-12 mt-12 pt-12 border-t border-white/10" id="trust-indicators">
+<div class="flex flex-col gap-1 trust-item opacity-0">
 <span class="text-white text-2xl font-light">3,000+</span>
 <span class="text-gold text-[10px] uppercase tracking-widest font-bold">Global Destinations</span>
 </div>
-<div class="flex flex-col gap-1 trust-item">
+<div class="flex flex-col gap-1 trust-item opacity-0">
 <span class="text-white text-2xl font-light">24/7</span>
 <span class="text-gold text-[10px] uppercase tracking-widest font-bold">Concierge Service</span>
 </div>
-<div class="flex flex-col gap-1 trust-item">
+<div class="flex flex-col gap-1 trust-item opacity-0">
 <span class="text-white text-2xl font-light">Elite</span>
 <span class="text-gold text-[10px] uppercase tracking-widest font-bold">Member Network</span>
 </div>
 </div>
 </div>
 </div>
+
 <!-- Side scroll indicator -->
-<div class="absolute bottom-10 right-10 hidden lg:flex flex-col items-center gap-4 scroll-indicator">
-<span class="text-gold text-[10px] uppercase tracking-[0.4em] rotate-90 origin-right mb-12">Discover More</span>
-<div class="w-px h-24 bg-gradient-to-b from-gold to-transparent"></div>
+<div class="absolute bottom-10 right-10 hidden lg:flex flex-col items-center gap-4">
+<span class="text-gold text-[10px] uppercase tracking-[0.4em] rotate-90 origin-right mb-12 opacity-0" id="scroll-text">Discover More</span>
+<div class="w-px h-24 bg-gradient-to-b from-gold to-transparent opacity-0" id="scroll-line"></div>
 </div>
 </main>
+
 <!-- Feature Highlight Section -->
-<section class="bg-background-dark py-24 border-t border-gold/10">
+<section class="bg-background-dark py-24 border-t border-gold/10" id="features-section">
 <div class="max-w-7xl mx-auto px-6 lg:px-10">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 feature-cards">
-<div class="flex flex-col gap-4 feature-card">
-<span class="material-symbols-outlined text-gold text-4xl float-anim">travel_explore</span>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-4 feature-card opacity-0">
+<span class="material-symbols-outlined text-gold text-4xl">travel_explore</span>
 <h3 class="text-white text-xl font-light tracking-wide">Unrivaled Access</h3>
 <p class="text-cream/60 text-sm leading-relaxed">From London to Tokyo, your office is waiting in the most prestigious business districts across the globe.</p>
 </div>
-<div class="flex flex-col gap-4 feature-card">
-<span class="material-symbols-outlined text-gold text-4xl float-anim">verified_user</span>
+<div class="flex flex-col gap-4 feature-card opacity-0">
+<span class="material-symbols-outlined text-gold text-4xl">verified_user</span>
 <h3 class="text-white text-xl font-light tracking-wide">Five-Star Standards</h3>
 <p class="text-cream/60 text-sm leading-relaxed">Experience a workspace that feels like a boutique hotel, featuring curated design and professional white-glove service.</p>
 </div>
-<div class="flex flex-col gap-4 feature-card">
-<span class="material-symbols-outlined text-gold text-4xl float-anim">hub</span>
+<div class="flex flex-col gap-4 feature-card opacity-0">
+<span class="material-symbols-outlined text-gold text-4xl">hub</span>
 <h3 class="text-white text-xl font-light tracking-wide">Elite Community</h3>
 <p class="text-cream/60 text-sm leading-relaxed">Connect with a global network of industry leaders, entrepreneurs, and high-net-worth professionals.</p>
 </div>
 </div>
 </div>
 </section>
+
 <!-- CTA Section -->
-<section class="relative bg-background-dark py-32 overflow-hidden cta-section">
+<section class="relative bg-background-dark py-32 overflow-hidden" id="cta-section">
 <div class="absolute inset-0 opacity-10 pointer-events-none">
-<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full pulse-glow"></div>
+<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full" id="glow-effect"></div>
 </div>
 <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
-<h2 class="text-white text-4xl md:text-5xl font-extralight mb-8 leading-tight reveal-anim">Elevate Your Professional Lifestyle.</h2>
-<p class="text-cream/70 text-lg mb-12 max-w-2xl mx-auto font-light reveal-anim">Private tours are available by invitation. Experience the Signature standard in person at any of our flagship locations.</p>
-<button class="btn-primary bg-primary hover:bg-primary/90 text-white h-16 px-12 rounded font-bold text-sm uppercase tracking-[0.2em] transition-all shadow-2xl">
+<h2 class="text-white text-4xl md:text-5xl font-extralight mb-8 leading-tight opacity-0" id="cta-title">Elevate Your Professional Lifestyle.</h2>
+<p class="text-cream/70 text-lg mb-12 max-w-2xl mx-auto font-light opacity-0" id="cta-text">Private tours are available by invitation. Experience the Signature standard in person at any of our flagship locations.</p>
+<button class="bg-primary hover:bg-primary/90 text-white h-16 px-12 rounded font-bold text-sm uppercase tracking-[0.2em] transition-all shadow-2xl opacity-0" id="final-cta">
                     Schedule a Private Tour
                 </button>
 </div>
 </section>
+
 <!-- Footer -->
-<footer class="bg-background-dark border-t border-white/5 pt-20 pb-10">
+<footer class="bg-background-dark border-t border-white/5 pt-20 pb-10" id="main-footer">
 <div class="max-w-7xl mx-auto px-6 lg:px-10">
 <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 opacity-0" id="footer-brand">
 <div class="flex items-center gap-3 text-gold">
 <svg class="w-6 h-6" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
 <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
@@ -194,19 +210,19 @@
                         </p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 opacity-0" id="footer-col-1">
 <h4 class="text-gold text-[10px] font-bold uppercase tracking-widest">Global</h4>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Locations</a>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Flagships</a>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">New Openings</a>
 </div>
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 opacity-0" id="footer-col-2">
 <h4 class="text-gold text-[10px] font-bold uppercase tracking-widest">Experience</h4>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Services</a>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Amenities</a>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Membership</a>
 </div>
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 opacity-0" id="footer-col-3">
 <h4 class="text-gold text-[10px] font-bold uppercase tracking-widest">Legal</h4>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Privacy Policy</a>
 <a class="text-cream/60 text-sm hover:text-cream transition-colors" href="#">Terms of Use</a>
@@ -215,8 +231,8 @@
 </div>
 </div>
 <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/5 pt-10">
-<p class="text-cream/30 text-[10px] uppercase tracking-widest">© 2024 Signature by IWG. All rights reserved.</p>
-<div class="flex gap-6">
+<p class="text-cream/30 text-[10px] uppercase tracking-widest opacity-0" id="copyright">© 2024 Signature by IWG. All rights reserved.</p>
+<div class="flex gap-6 opacity-0" id="social-icons">
 <a class="text-cream/30 hover:text-gold transition-colors" href="#">
 <span class="material-symbols-outlined text-xl">share</span>
 </a>
@@ -232,165 +248,348 @@
 </footer>
 </div>
 
-<!-- GSAP Animations Script -->
 <script>
-    // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Initialize animations when page loads
-    document.addEventListener('DOMContentLoaded', function() {
+        // Initialiser GSAP
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
         
-        // Header animation
-        gsap.from('header', {
-            duration: 1,
-            y: -50,
-            opacity: 0,
-            ease: 'power3.out'
-        });
-        
-        // Logo animation
-        gsap.from('.logo-anim', {
-            duration: 1.5,
-            rotation: 360,
-            scale: 0,
-            ease: 'back.out(1.7)',
-            delay: 0.3
-        });
-        
-        // Navigation links animation
-        gsap.from('.nav-link', {
-            duration: 0.8,
-            y: -20,
-            opacity: 0,
-            stagger: 0.1,
-            ease: 'power3.out',
-            delay: 0.5
-        });
-        
-        // Hero content animation
-        gsap.from('.hero-content .reveal-anim', {
-            duration: 1.2,
-            y: 40,
-            opacity: 0,
-            stagger: 0.2,
-            ease: 'power3.out',
-            delay: 0.8
-        });
-        
-        // Gold text animation
-        gsap.to('.gold-text', {
-            duration: 3,
-            color: '#c5a059',
-            ease: 'power2.inOut',
-            yoyo: true,
-            repeat: -1
-        });
-        
-        // Button group animation
-        gsap.from('.button-group button', {
-            duration: 1,
-            y: 30,
-            opacity: 0,
-            stagger: 0.2,
-            ease: 'back.out(1.7)',
-            delay: 1.5
-        });
-        
-        // Trust indicators animation
-        gsap.from('.trust-item', {
-            duration: 1,
-            y: 30,
-            opacity: 0,
-            stagger: 0.3,
-            ease: 'power3.out',
-            delay: 2,
-            scrollTrigger: {
-                trigger: '.trust-indicators',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
-        
-        // Feature cards animation
-        gsap.from('.feature-card', {
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            stagger: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.feature-cards',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
-        
-        // CTA section animation
-        gsap.from('.cta-section .reveal-anim', {
-            duration: 1.2,
-            y: 40,
-            opacity: 0,
-            stagger: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.cta-section',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
-        
-        // Pulse animation for glow effect
-        gsap.to('.pulse-glow', {
-            duration: 3,
-            scale: 1.2,
-            opacity: 0.15,
-            yoyo: true,
-            repeat: -1,
-            ease: 'sine.inOut'
-        });
-        
-        // Button hover effects
-        document.querySelectorAll('.btn-primary').forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                gsap.to(button, {
-                    duration: 0.3,
-                    scale: 1.05,
-                    boxShadow: '0 20px 40px rgba(17, 82, 212, 0.4)',
+        // Animation d'entrée de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation du header
+            gsap.to('#main-header', {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+            
+            // Animation des éléments de navigation
+            gsap.to('.nav-link', {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                delay: 0.4
+            });
+            
+            // Animation du bouton
+            gsap.to('.btn-primary', {
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                delay: 0.6
+            });
+            
+            // Animation du hero
+            const heroTimeline = gsap.timeline();
+            
+            heroTimeline
+                .to('#hero-bg', {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
                     ease: 'power2.out'
+                })
+                .from('#hero-gradient', {
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power2.out'
+                }, '-=0.5')
+                .from('#hero-subtitle', {
+                    opacity: 0,
+                    x: -30,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                })
+                .from('#hero-title', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                }, '-=0.3')
+                .from('#hero-desc', {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                }, '-=0.2')
+                .from('#cta-primary', {
+                    opacity: 0,
+                    x: -20,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                })
+                .from('#cta-secondary', {
+                    opacity: 0,
+                    x: 20,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                }, '-=0.3')
+                .from('.trust-item', {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.6,
+                    stagger: 0.2,
+                    ease: 'power3.out'
+                }, '-=0.2');
+            
+            // Animation du scroll indicator
+            gsap.to(['#scroll-text', '#scroll-line'], {
+                opacity: 1,
+                duration: 1,
+                delay: 2,
+                ease: 'power2.out'
+            });
+            
+            // Effet de scroll sur le scroll indicator
+            gsap.to('#scroll-line', {
+                height: 0,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
+            
+            // Animation des sections au scroll
+            // Section features
+            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    delay: i * 0.2,
+                    ease: 'power3.out'
                 });
             });
             
-            button.addEventListener('mouseleave', () => {
-                gsap.to(button, {
-                    duration: 0.3,
-                    scale: 1,
-                    boxShadow: '0 10px 30px rgba(17, 82, 212, 0.2)',
-                    ease: 'power2.out'
+            // Section CTA
+            gsap.from('#cta-title', {
+                scrollTrigger: {
+                    trigger: '#cta-section',
+                    start: 'top 70%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#cta-text', {
+                scrollTrigger: {
+                    trigger: '#cta-section',
+                    start: 'top 65%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                delay: 0.2,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#final-cta', {
+                scrollTrigger: {
+                    trigger: '#cta-section',
+                    start: 'top 60%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                scale: 0.9,
+                duration: 0.8,
+                delay: 0.4,
+                ease: 'power3.out'
+            });
+            
+            // Animation du glow effect
+            gsap.to('#glow-effect', {
+                scrollTrigger: {
+                    trigger: '#cta-section',
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    scrub: true
+                },
+                scale: 1.2,
+                duration: 1,
+                ease: 'power1.inOut'
+            });
+            
+            // Animation du footer
+            gsap.from('#footer-brand', {
+                scrollTrigger: {
+                    trigger: '#main-footer',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                x: -30,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#footer-col-1', {
+                scrollTrigger: {
+                    trigger: '#main-footer',
+                    start: 'top 75%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                delay: 0.1,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#footer-col-2', {
+                scrollTrigger: {
+                    trigger: '#main-footer',
+                    start: 'top 75%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                delay: 0.2,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#footer-col-3', {
+                scrollTrigger: {
+                    trigger: '#main-footer',
+                    start: 'top 75%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                delay: 0.3,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#copyright', {
+                scrollTrigger: {
+                    trigger: '#main-footer',
+                    start: 'top 60%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 10,
+                duration: 0.6,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('#social-icons', {
+                scrollTrigger: {
+                    trigger: '#main-footer',
+                    start: 'top 60%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 10,
+                duration: 0.6,
+                delay: 0.1,
+                ease: 'power3.out'
+            });
+            
+            // Animation au hover des cartes
+            gsap.utils.toArray('.feature-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        y: -10,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
                 });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        y: 0,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            // Animation des boutons au hover
+            gsap.utils.toArray('.btn-primary').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    gsap.to(btn, {
+                        scale: 1.05,
+                        duration: 0.2,
+                        ease: 'power2.out'
+                    });
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, {
+                        scale: 1,
+                        duration: 0.2,
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            // Smooth scroll pour les liens d'ancrage
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        gsap.to(window, {
+                            duration: 1,
+                            scrollTo: {
+                                y: targetElement,
+                                offsetY: 80
+                            },
+                            ease: 'power3.inOut'
+                        });
+                    }
+                });
+            });
+            
+            // Effet de parallaxe sur l'image du hero
+            gsap.to('#hero-bg', {
+                scrollTrigger: {
+                    trigger: 'main',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                },
+                y: 100,
+                ease: 'none'
             });
         });
         
-        // Scroll indicator animation
-        gsap.to('.scroll-indicator', {
-            duration: 2,
-            y: -20,
-            yoyo: true,
-            repeat: -1,
-            ease: 'sine.inOut'
-        });
+        // Animation du marqueur de scroll
+        let scrollIndicatorAnimation;
+        function setupScrollIndicator() {
+            scrollIndicatorAnimation = gsap.to('#scroll-line', {
+                height: 0,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
+        }
         
-        // Parallax effect for hero background
-        gsap.to('.hero-gradient', {
-            scrollTrigger: {
-                trigger: 'main',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true
-            },
-            y: 100,
-            ease: 'none'
+        // Pause l'animation quand l'utilisateur scroll
+        window.addEventListener('scroll', () => {
+            if(scrollIndicatorAnimation) {
+                scrollIndicatorAnimation.pause();
+                gsap.to('#scroll-line', {
+                    opacity: 0,
+                    duration: 0.3
+                });
+            }
         });
-        
-    });
-</script>
+    </script>
 </body></html>
