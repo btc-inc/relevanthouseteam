@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Luxury Brands</title>
+    <title>Relevant House - Luxury Digital Transformation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- GSAP et ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <!-- Webflow-like animations (GSAP-based) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
     <style>
@@ -19,10 +20,16 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #e5e5e5;
+            font-family: 'Montserrat', sans-serif;
+            background: #000000;
+            color: #FFFFFF;
             overflow-x: hidden;
+        }
+        
+        .brand-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
         
         /* Animation Classes */
@@ -45,27 +52,35 @@
         
         .card-hover {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        
-        .brand-gradient {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
         
-        /* Gradient Animation */
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(139, 0, 0, 0.3);
+            border-color: rgba(139, 0, 0, 0.3);
         }
         
-        .gradient-animate {
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+        .brand-accent {
+            color: #8B0000;
+        }
+        
+        .bg-brand-accent {
+            background-color: #8B0000;
+        }
+        
+        .border-brand-accent {
+            border-color: #8B0000;
+        }
+        
+        /* Gradient Animation */
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .pulse-animate {
+            animation: subtlePulse 4s ease-in-out infinite;
         }
         
         /* Stagger Animation Delay Classes */
@@ -77,35 +92,54 @@
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         
         ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+            background: #0a0a0a;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #fbbf24, #f59e0b);
-            border-radius: 5px;
+            background: #8B0000;
+            border-radius: 2px;
         }
         
         /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
+        
+        /* Silent Luxury Effects */
+        .silent-border {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .silent-hover:hover {
+            background: rgba(139, 0, 0, 0.05);
+        }
+        
+        /* Typography */
+        .text-subtle {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .text-discreet {
+            color: rgba(255, 255, 255, 0.4);
+        }
     </style>
 </head>
 <body class="min-h-screen bg-black">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-white/10 py-4 reveal-item" id="main-nav">
+    <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md silent-border py-4 reveal-item" id="main-nav">
         <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="size-8 bg-gradient-to-r from-amber-500 to-amber-300 rounded-full gradient-animate"></div>
-                <h1 class="text-xl font-semibold tracking-tight">LUXURY PORTFOLIO</h1>
+                <div class="size-8 bg-brand-accent rounded-full pulse-animate"></div>
+                <h1 class="text-xl font-semibold tracking-tight brand-heading">RELEVANT HOUSE</h1>
             </div>
             <div class="hidden md:flex gap-8">
-                <a href="#showcase" class="text-sm text-white/60 hover:text-white transition-all duration-300 hover:scale-105">Collections</a>
-                <a href="#about" class="text-sm text-white/60 hover:text-white transition-all duration-300 hover:scale-105">À propos</a>
+                <a href="#showcase" class="text-sm text-subtle hover:text-white transition-all duration-500">Portfolio</a>
+                <a href="#about" class="text-sm text-subtle hover:text-white transition-all duration-500">Manifeste</a>
+                <a href="#contact" class="text-sm text-subtle hover:text-white transition-all duration-500">Contact Privé</a>
             </div>
         </div>
     </nav>
@@ -113,169 +147,212 @@
     <!-- Hero Section -->
     <header class="pt-32 pb-20 px-6 text-center overflow-hidden">
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight reveal-text">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-amber-200 gradient-animate">Élégance & Performance</span>
+            <h1 class="text-5xl md:text-6xl brand-heading mb-6 leading-tight reveal-text">
+                <span class="brand-accent">Architecture Digitale</span> pour l'Élite
             </h1>
-            <p class="text-xl text-white/70 mb-10 max-w-2xl mx-auto reveal-text delay-100">
-                Collection exclusive de marques de luxe et d'agences automobiles pour la clientèle exigeante
+            <p class="text-lg text-subtle mb-10 max-w-2xl mx-auto reveal-text delay-100">
+                Nous transformons les entreprises marocaines en références digitales en six mois. 
+                L'art de la présence silencieuse dans l'espace numérique.
             </p>
             <div class="flex gap-4 justify-center reveal-text delay-200">
-                <a href="#showcase" class="px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-300 text-black font-medium rounded-full hover:shadow-xl hover:shadow-amber-500/25 transition-all duration-300 transform hover:-translate-y-1">
-                    Explorer les marques
+                <a href="#showcase" class="px-8 py-3 bg-brand-accent text-white font-medium silent-border hover:bg-[#6a0000] transition-all duration-500">
+                    Explorer le Portfolio
                 </a>
-                <a href="#about" class="px-8 py-3 border border-white/20 rounded-full hover:bg-white/5 hover:border-white/40 transition-all duration-300 transform hover:-translate-y-1">
-                    En savoir plus
+                <a href="#about" class="px-8 py-3 silent-border text-white rounded hover:bg-white/5 transition-all duration-500">
+                    Lire le Manifeste
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Brands Grid -->
+    <!-- Portfolio Grid -->
     <main id="showcase" class="py-16 px-6">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center reveal-text">Collection Exclusive</h2>
+            <h2 class="text-3xl brand-heading mb-4 text-center reveal-text">Portfolio Sélectif</h2>
+            <p class="text-subtle text-center mb-12 max-w-2xl mx-auto reveal-text delay-100">
+                Une curation d'entreprises transformées en repères digitaux d'excellence
+            </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Vanguard Motors -->
-                <a href="VanguardMotors.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group scale-in">
-                    <div class="h-48 bg-gradient-to-br from-amber-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2069')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <span class="text-xs font-semibold tracking-widest text-amber-400 uppercase">Automotive</span>
-                            <h3 class="text-2xl font-bold mt-2">Vanguard Motors</h3>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Espaces de Coworking -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Espaces d'Affaires</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Coworking Élite</h3>
                     </div>
-                    <div class="p-6">
-                        <p class="text-white/60 text-sm mb-4">Gestion d'actifs automobiles d'élite pour family offices. Transformez la passion en performance.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-amber-400 font-medium">Wealth in Motion</span>
-                            <span class="material-symbols-outlined text-amber-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2">arrow_forward</span>
-                        </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Redéfinition digitale d'espaces de travail exclusifs pour l'élite entrepreneuriale
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Signature • Spaces • WeWork</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
                     </div>
-                </a>
+                </div>
 
-                <!-- Zenith Cars -->
-                <a href="ZENITH.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group scale-in delay-100">
-                    <div class="h-48 bg-gradient-to-br from-teal-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1563720223484-21c6c2d3c6c8?q=80&w=2070')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <span class="text-xs font-semibold tracking-widest text-teal-400 uppercase">Automotive</span>
-                            <h3 class="text-2xl font-bold mt-2">Zenith Cars</h3>
-                        </div>
+                <!-- Agences de Voyage -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-100 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Voyage</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Agences de Luxe</h3>
                     </div>
-                    <div class="p-6">
-                        <p class="text-white/60 text-sm mb-4">Souveraineté silencieuse. Mobilité architecturale pour le souverain moderne.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-teal-400 font-medium">Silent Sovereignty</span>
-                            <span class="material-symbols-outlined text-teal-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2">arrow_forward</span>
-                        </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Transformation numérique d'expériences voyage sur-mesure pour clients exigeants
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Velaris Privé • VIP Travel</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
                     </div>
-                </a>
+                </div>
 
-                <!-- Velaris Privé -->
-                <a href="VelarisPrivé.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group scale-in delay-200">
-                    <div class="h-48 bg-gradient-to-br from-purple-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <span class="text-xs font-semibold tracking-widest text-purple-400 uppercase">Hospitality</span>
-                            <h3 class="text-2xl font-bold mt-2">Velaris Privé</h3>
-                        </div>
+                <!-- Automobile -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-200 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Automobile</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Agences Automobiles</h3>
                     </div>
-                    <div class="p-6">
-                        <p class="text-white/60 text-sm mb-4">Expériences avant-gardistes minimalistes à travers les paysages les plus prestigieux d'Europe.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-purple-400 font-medium">Avant-Garde Minimalist</span>
-                            <span class="material-symbols-outlined text-purple-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2">arrow_forward</span>
-                        </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Présence digitale pour collections automobiles d'exception et services premium
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Vanguard • Zenith • Prestige</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
                     </div>
-                </a>
+                </div>
 
-                <!-- Signature -->
-                <a href="Signature.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group scale-in delay-300">
-                    <div class="h-48 bg-gradient-to-br from-blue-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <span class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Workspace</span>
-                            <h3 class="text-2xl font-bold mt-2">Signature by IWG</h3>
-                        </div>
+                <!-- Wellness -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-300 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Wellness</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Centres de Performance</h3>
                     </div>
-                    <div class="p-6">
-                        <p class="text-white/60 text-sm mb-4">Espaces de travail exclusifs conçus pour ceux qui exigent l'excellence et la discrétion.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-blue-400 font-medium">Luxury Coworking</span>
-                            <span class="material-symbols-outlined text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2">arrow_forward</span>
-                        </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Architecture digitale pour espaces wellness et programmes d'optimisation biologique
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Aureus Elite • Performance</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
                     </div>
-                </a>
+                </div>
 
-                <!-- Aureus Elite -->
-                <a href="AureusElite.html" class="brand-gradient border border-white/10 rounded-2xl overflow-hidden card-hover group scale-in delay-400">
-                    <div class="h-48 bg-gradient-to-br from-yellow-900/30 to-black relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070')] bg-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <span class="text-xs font-semibold tracking-widest text-yellow-400 uppercase">Lifestyle</span>
-                            <h3 class="text-2xl font-bold mt-2">Aureus Elite</h3>
-                        </div>
+                <!-- Mode -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-400 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Mode</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Boutiques de Luxe</h3>
                     </div>
-                    <div class="p-6">
-                        <p class="text-white/60 text-sm mb-4">Optimisation biologique et réseautage haut de gamme pour l'élite mondiale.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-yellow-400 font-medium">Sovereign State of Performance</span>
-                            <span class="material-symbols-outlined text-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2">arrow_forward</span>
-                        </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Transformation digitale de boutiques physiques en destinations en ligne exclusives
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Haute Couture • Prêt-à-porter</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
                     </div>
-                </a>
+                </div>
 
-                <!-- All Brands Card -->
-                <div class="brand-gradient border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-center items-center p-8 text-center scale-in delay-500">
-                    <div class="size-20 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-500/20 flex items-center justify-center mb-6 hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-3xl text-white/60">dashboard</span>
+                <!-- Gastronomie -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-500 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Gastronomie</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Restaurants Étoilés</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Toutes les marques</h3>
-                    <p class="text-white/50 text-sm mb-6">Accédez à l'ensemble du portfolio exclusif</p>
-                    <div class="flex flex-wrap gap-3 justify-center">
-                        <a href="VanguardMotors.html" class="px-4 py-2 bg-amber-500/10 text-amber-400 rounded-full text-xs font-medium hover:bg-amber-500/20 hover:scale-105 transition-all duration-300">Vanguard</a>
-                        <a href="ZENITH.html" class="px-4 py-2 bg-teal-500/10 text-teal-400 rounded-full text-xs font-medium hover:bg-teal-500/20 hover:scale-105 transition-all duration-300">Zenith</a>
-                        <a href="VelarisPrivé.html" class="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-xs font-medium hover:bg-purple-500/20 hover:scale-105 transition-all duration-300">Velaris</a>
-                        <a href="Signature.html" class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium hover:bg-blue-500/20 hover:scale-105 transition-all duration-300">Signature</a>
-                        <a href="AureusElite.html" class="px-4 py-2 bg-yellow-500/10 text-yellow-400 rounded-full text-xs font-medium hover:bg-yellow-500/20 hover:scale-105 transition-all duration-300">Aureus</a>
+                    <p class="text-subtle text-sm mb-4">
+                        Présence digitale discrète pour établissements gastronomiques d'exception
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Casablanca • Marrakech • Rabat</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- About Section -->
+    <!-- Manifesto Section -->
     <section id="about" class="py-20 px-6 border-t border-white/10">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6 reveal-text">Portfolio d'Excellence</h2>
-            <p class="text-white/70 text-lg mb-10 max-w-2xl mx-auto reveal-text delay-100">
-                Cette collection représente le summum du luxe contemporain à travers différents secteurs : 
-                automobile, immobilier, espaces de travail et lifestyle. Chaque marque incarne une philosophie unique 
-                d'excellence, de discrétion et de performance.
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl brand-heading mb-2 text-center reveal-text">Le Manifeste</h2>
+            <p class="text-subtle text-center mb-12 max-w-xl mx-auto reveal-text delay-100">
+                "Nous ne construisons pas pour la visibilité. Nous architecturons pour l'autorité."
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="text-center p-6 reveal-item">
-                    <div class="size-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-amber-500/20 to-amber-300/20 flex items-center justify-center hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-amber-400">diamond</span>
-                    </div>
-                    <h4 class="font-bold mb-2">Exclusivité</h4>
-                    <p class="text-white/60 text-sm">Accès réservé à une clientèle sélectionnée</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="reveal-item">
+                    <h3 class="text-xl font-bold mb-4 brand-accent">Notre Philosophie</h3>
+                    <p class="text-subtle mb-4">
+                        Relevant House est une maison privée spécialisée dans la reconstruction d'entreprises 
+                        sous-représentées dans l'espace numérique. Nous opérons dans le silence, avec des systèmes 
+                        stricts et un contrôle total sur l'exécution.
+                    </p>
+                    <p class="text-subtle">
+                        Chaque projet est traité comme une propriété privée. Nous travaillons avec un nombre 
+                        très limité d'entreprises, uniquement lorsqu'il existe un potentiel clair et un alignement 
+                        parfait.
+                    </p>
                 </div>
-                <div class="text-center p-6 reveal-item delay-100">
-                    <div class="size-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-teal-500/20 to-blue-500/20 flex items-center justify-center hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-teal-400">design_services</span>
+                
+                <div class="reveal-item delay-100">
+                    <h3 class="text-xl font-bold mb-4 brand-accent">Notre Cible</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Espaces de Coworking Élite</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Agences Automobiles de Luxe</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Restaurants & Cafés Sélectifs</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Salons de Beauté d'Exception</span>
+                        </div>
                     </div>
-                    <h4 class="font-bold mb-2">Design Avant-Garde</h4>
-                    <p class="text-white/60 text-sm">Esthétique minimaliste et futuriste</p>
                 </div>
-                <div class="text-center p-6 reveal-item delay-200">
-                    <div class="size-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 flex items-center justify-center hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-purple-400">security</span>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 silent-border rounded-xl reveal-item">
+                    <div class="size-12 mx-auto mb-4 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-accent">visibility_off</span>
                     </div>
-                    <h4 class="font-bold mb-2">Confidentialité</h4>
-                    <p class="text-white/60 text-sm">Discrétion absolue et protection des données</p>
+                    <h4 class="font-bold mb-2">Le Silence Stratégique</h4>
+                    <p class="text-subtle text-sm">Présence digitale perceptible uniquement par l'élite ciblée</p>
                 </div>
+                <div class="text-center p-6 silent-border rounded-xl reveal-item delay-100">
+                    <div class="size-12 mx-auto mb-4 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-accent">design_services</span>
+                    </div>
+                    <h4 class="font-bold mb-2">Artisanat Digital</h4>
+                    <p class="text-subtle text-sm">Chaque projet est conçu sur-mesure, sans template</p>
+                </div>
+                <div class="text-center p-6 silent-border rounded-xl reveal-item delay-200">
+                    <div class="size-12 mx-auto mb-4 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-accent">schedule</span>
+                    </div>
+                    <h4 class="font-bold mb-2">Timing Maîtrisé</h4>
+                    <p class="text-subtle text-sm">Transformation complète en six mois chrono</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 border-t border-white/10">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl brand-heading mb-6 reveal-text">Contact Privé</h2>
+            <p class="text-subtle mb-8 reveal-text delay-100">
+                Relevant House n'est pas accessible à tous. Si votre entreprise correspond à nos critères 
+                d'excellence et que vous comprenez que le luxe se construit dans la discrétion, nous pouvons 
+                entamer une conversation.
+            </p>
+            <div class="reveal-text delay-200">
+                <a href="mailto:contact@relevanthouse.com" class="inline-block px-8 py-3 silent-border text-white rounded hover:bg-brand-accent hover:border-brand-accent transition-all duration-500">
+                    contact@relevanthouse.com
+                </a>
+                <p class="text-discreet text-sm mt-4">Casablanca • Rabat • Marrakech • Tanger • Fès</p>
             </div>
         </div>
     </section>
@@ -285,12 +362,12 @@
         <div class="max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center gap-3 mb-6 md:mb-0">
-                    <div class="size-8 bg-gradient-to-r from-amber-500 to-amber-300 rounded-full gradient-animate"></div>
-                    <span class="text-lg font-semibold">LUXURY PORTFOLIO</span>
+                    <div class="size-8 bg-brand-accent rounded-full pulse-animate"></div>
+                    <span class="text-lg font-semibold brand-heading">RELEVANT HOUSE</span>
                 </div>
                 <div class="text-center md:text-right">
-                    <p class="text-white/40 text-sm mb-2">Collection exclusive de marques de luxe</p>
-                    <p class="text-white/30 text-xs">© 2024 Tous droits réservés. Pour usage démonstration uniquement.</p>
+                    <p class="text-discreet text-sm mb-2">Architecture digitale pour l'élite entrepreneuriale</p>
+                    <p class="text-discreet text-xs">© 2024 Relevant House. Tous droits réservés. Discrétion assurée.</p>
                 </div>
             </div>
         </div>
@@ -348,15 +425,16 @@
                 }
             });
             
-            // Parallax effect for hero background elements
-            gsap.to('.card-hover .absolute.inset-0', {
-                yPercent: 10,
-                ease: "none",
+            // Contact section animation
+            gsap.to('#contact .reveal-text', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
                 scrollTrigger: {
-                    trigger: '.card-hover',
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
+                    trigger: '#contact',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
                 }
             });
             
@@ -380,7 +458,7 @@
             document.querySelectorAll('.card-hover').forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     gsap.to(card, {
-                        scale: 1.02,
+                        y: -8,
                         duration: 0.3,
                         ease: "power2.out"
                     });
@@ -388,17 +466,17 @@
                 
                 card.addEventListener('mouseleave', () => {
                     gsap.to(card, {
-                        scale: 1,
+                        y: 0,
                         duration: 0.3,
                         ease: "power2.out"
                     });
                 });
             });
             
-            // Animated gradient for hero title
-            gsap.to('.gradient-animate', {
-                backgroundPosition: '100% 50%',
-                duration: 3,
+            // Subtle pulse animation for accent elements
+            gsap.to('.pulse-animate', {
+                opacity: 0.5,
+                duration: 2,
                 repeat: -1,
                 yoyo: true,
                 ease: "power1.inOut"
@@ -426,13 +504,13 @@
             });
         });
         
-        // Add scroll progress indicator
-        gsap.to('progress', {
-            value: 100,
-            ease: 'none',
-            scrollTrigger: {
-                scrub: 0.3
-            }
+        // Scroll progress indicator (simplified)
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            
+            // You could add a progress bar here if needed
         });
     </script>
 </body>
