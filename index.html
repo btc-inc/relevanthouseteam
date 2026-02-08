@@ -3,836 +3,514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relevant House | Architecture Digitale pour l'Élite</title>
+    <title>Relevant House - Luxury Digital Transformation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- GSAP et Plugins -->
+    <!-- GSAP et ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     
-    <!-- Polices Premium -->
+    <!-- Polices -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
-    <!-- Splide Carousel -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    
     <style>
-        :root {
-            --brand-primary: #8B0000;
-            --brand-dark: #000000;
-            --brand-light: #FFFFFF;
-            --brand-accent: rgba(139, 0, 0, 0.1);
-        }
-        
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
-        
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--brand-dark);
-            color: var(--brand-light);
+            background: #000000;
+            color: #FFFFFF;
             overflow-x: hidden;
-            cursor: default;
         }
         
         .brand-heading {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             letter-spacing: -0.5px;
-            line-height: 1.1;
         }
         
-        /* Effets de Texte Premium */
-        .text-stroke {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-            color: transparent;
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Animations Avancées */
+        /* Animation Classes */
         .reveal-item {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             will-change: transform, opacity;
         }
         
         .reveal-text {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
         }
         
         .scale-in {
             opacity: 0;
-            transform: scale(0.97);
+            transform: scale(0.95);
             will-change: transform, opacity;
         }
         
-        .fade-in {
-            opacity: 0;
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
         
-        /* Cards Premium */
-        .premium-card {
-            background: linear-gradient(145deg, rgba(15, 15, 15, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .premium-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-        
-        .premium-card:hover::before {
-            opacity: 1;
-        }
-        
-        .premium-card:hover {
-            transform: translateY(-12px);
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -10px rgba(139, 0, 0, 0.3);
             border-color: rgba(139, 0, 0, 0.3);
-            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15);
         }
         
-        /* Effets de Hover Élégants */
-        .hover-lift {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .brand-accent {
+            color: #8B0000;
         }
         
-        .hover-lift:hover {
-            transform: translateY(-4px);
+        .bg-brand-accent {
+            background-color: #8B0000;
         }
         
-        /* Badges */
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(139, 0, 0, 0.15);
-            border: 1px solid rgba(139, 0, 0, 0.3);
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        .border-brand-accent {
+            border-color: #8B0000;
         }
         
-        /* Sections */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            margin: 80px 0;
+        /* Gradient Animation */
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
         
-        /* Navigation Premium */
-        .nav-glass {
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .pulse-animate {
+            animation: subtlePulse 4s ease-in-out infinite;
         }
         
-        /* Loader Élégant */
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 2px solid transparent;
-            border-top-color: var(--brand-primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        /* Stagger Animation Delay Classes */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Scrollbar Personnalisée */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         
         ::-webkit-scrollbar-track {
-            background: rgba(10, 10, 10, 0.8);
+            background: #0a0a0a;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, var(--brand-primary), #5a0000);
+            background: #8B0000;
             border-radius: 2px;
         }
         
-        /* Textes */
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Silent Luxury Effects */
+        .silent-border {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .silent-hover:hover {
+            background: rgba(139, 0, 0, 0.05);
+        }
+        
+        /* Typography */
         .text-subtle {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .text-discreet {
             color: rgba(255, 255, 255, 0.4);
         }
-        
-        /* Effet de Parallaxe */
-        .parallax-layer {
-            will-change: transform;
-        }
-        
-        /* Animation de Pulse Subtile */
-        @keyframes subtlePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .pulse-subtle {
-            animation: subtlePulse 3s ease-in-out infinite;
-        }
-        
-        /* Marquee Animation */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-        }
-        
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        /* Modal Premium */
-        .modal-overlay {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
     </style>
 </head>
-<body class="min-h-screen bg-black antialiased">
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 bg-black z-50 flex items-center justify-center">
-        <div class="text-center">
-            <div class="loader mb-6"></div>
-            <p class="text-discreet text-sm tracking-wider">RELEVANT HOUSE</p>
-        </div>
-    </div>
-
+<body class="min-h-screen bg-black">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-40 nav-glass py-5 reveal-item" id="main-nav">
-        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
+    <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md silent-border py-4 reveal-item" id="main-nav">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-px bg-brand-primary"></div>
-                <h1 class="text-xl font-light tracking-widest brand-heading">RELEVANT HOUSE</h1>
-                <div class="w-10 h-px bg-brand-primary"></div>
+                <div class="size-8 bg-brand-accent rounded-full pulse-animate"></div>
+                <h1 class="text-xl font-semibold tracking-tight brand-heading">RELEVANT HOUSE</h1>
             </div>
-            
-            <div class="hidden lg:flex items-center gap-10">
-                <a href="#philosophie" class="text-sm text-subtle hover:text-white transition-all duration-500 relative group">
-                    <span>Philosophie</span>
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-brand-primary group-hover:w-full transition-all duration-500"></span>
-                </a>
-                <a href="#services" class="text-sm text-subtle hover:text-white transition-all duration-500 relative group">
-                    <span>Services</span>
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-brand-primary group-hover:w-full transition-all duration-500"></span>
-                </a>
-                <a href="#portfolio" class="text-sm text-subtle hover:text-white transition-all duration-500 relative group">
-                    <span>Portfolio</span>
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-brand-primary group-hover:w-full transition-all duration-500"></span>
-                </a>
-                <a href="#contact" class="px-6 py-2 border border-brand-primary text-brand-primary text-sm hover:bg-brand-primary hover:text-white transition-all duration-500">
-                    Contact Privé
-                </a>
+            <div class="hidden md:flex gap-8">
+                <a href="#showcase" class="text-sm text-subtle hover:text-white transition-all duration-500">Portfolio</a>
+                <a href="#about" class="text-sm text-subtle hover:text-white transition-all duration-500">Manifeste</a>
+                <a href="#contact" class="text-sm text-subtle hover:text-white transition-all duration-500">Contact Privé</a>
             </div>
-            
-            <button id="mobile-menu-btn" class="lg:hidden">
-                <span class="material-symbols-outlined text-white">menu</span>
-            </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black z-30 hidden lg:hidden">
-        <div class="h-full flex flex-col items-center justify-center gap-8">
-            <a href="#philosophie" class="text-xl text-white">Philosophie</a>
-            <a href="#services" class="text-xl text-white">Services</a>
-            <a href="#portfolio" class="text-xl text-white">Portfolio</a>
-            <a href="#contact" class="text-xl text-white">Contact</a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <header class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary opacity-5 blur-3xl rounded-full"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-primary opacity-5 blur-3xl rounded-full"></div>
-        </div>
-        
-        <div class="relative z-10 max-w-6xl mx-auto px-8 text-center">
-            <div class="mb-8">
-                <span class="badge mb-6 pulse-subtle">EXCLUSIVITÉ ABSOLUE</span>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl brand-heading mb-6 reveal-text">
-                    <span class="text-gradient">Architecture</span><br>
-                    <span class="text-stroke">Digitale</span><br>
-                    <span class="text-gradient">pour l'Élite</span>
-                </h1>
-            </div>
-            
-            <p class="text-xl text-subtle max-w-3xl mx-auto mb-12 reveal-text delay-200">
-                Nous transformons les entreprises marocaines en références digitales incontournables en six mois. 
-                Une présence silencieuse qui parle d'autorité.
+    <header class="pt-32 pb-20 px-6 text-center overflow-hidden">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl brand-heading mb-6 leading-tight reveal-text">
+                <span class="brand-accent">Architecture Digitale</span> pour l'Élite
+            </h1>
+            <p class="text-lg text-subtle mb-10 max-w-2xl mx-auto reveal-text delay-100">
+                Nous transformons les entreprises marocaines en références digitales en six mois. 
+                L'art de la présence silencieuse dans l'espace numérique.
             </p>
-            
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center reveal-text delay-400">
-                <a href="#contact" class="group relative px-10 py-4 overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-primary to-[#5a0000] transform group-hover:scale-105 transition-transform duration-500"></div>
-                    <span class="relative text-sm font-medium tracking-wider">DEMANDER UN ACCÈS</span>
+            <div class="flex gap-4 justify-center reveal-text delay-200">
+                <a href="#showcase" class="px-8 py-3 bg-brand-accent text-white font-medium silent-border hover:bg-[#6a0000] transition-all duration-500">
+                    Explorer le Portfolio
                 </a>
-                <a href="#portfolio" class="px-10 py-4 border border-white/20 text-sm font-medium tracking-wider hover:bg-white/5 hover:border-white/40 transition-all duration-500">
-                    EXPLORER LE PORTFOLIO
+                <a href="#about" class="px-8 py-3 silent-border text-white rounded hover:bg-white/5 transition-all duration-500">
+                    Lire le Manifeste
                 </a>
-            </div>
-            
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2">
-                <div class="flex flex-col items-center">
-                    <span class="text-discreet text-xs mb-2">DÉFILER</span>
-                    <div class="w-px h-12 bg-gradient-to-b from-brand-primary to-transparent"></div>
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- Marquee Brands -->
-    <div class="py-8 overflow-hidden bg-black/50">
-        <div class="marquee-container">
-            <div class="marquee-content">
-                <span class="text-discreet text-lg mx-12">CASABLANCA</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">RABAT</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">MARRAKECH</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">TANGER</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">FÈS</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">COWORKING SPACES</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">AGENCES AUTOMOBILES</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">RESTAURANTS ÉTOILÉS</span>
-        <span class="text-discreet text-lg mx-12">•</span>
-                <span class="text-discreet text-lg mx-12">SALONS DE LUXE</span>
+    <!-- Portfolio Grid -->
+    <main id="showcase" class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl brand-heading mb-4 text-center reveal-text">Portfolio Sélectif</h2>
+            <p class="text-subtle text-center mb-12 max-w-2xl mx-auto reveal-text delay-100">
+                Une curation d'entreprises transformées en repères digitaux d'excellence
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Espaces de Coworking -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Espaces d'Affaires</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Coworking Élite</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Redéfinition digitale d'espaces de travail exclusifs pour l'élite entrepreneuriale
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Signature • Spaces • WeWork</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
+                    </div>
+                </div>
+
+                <!-- Agences de Voyage -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-100 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Voyage</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Agences de Luxe</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Transformation numérique d'expériences voyage sur-mesure pour clients exigeants
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Velaris Privé • VIP Travel</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
+                    </div>
+                </div>
+
+                <!-- Automobile -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-200 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Automobile</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Agences Automobiles</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Présence digitale pour collections automobiles d'exception et services premium
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Vanguard • Zenith • Prestige</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
+                    </div>
+                </div>
+
+                <!-- Wellness -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-300 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Wellness</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Centres de Performance</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Architecture digitale pour espaces wellness et programmes d'optimisation biologique
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Aureus Elite • Performance</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
+                    </div>
+                </div>
+
+                <!-- Mode -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-400 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Mode</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Boutiques de Luxe</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Transformation digitale de boutiques physiques en destinations en ligne exclusives
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Haute Couture • Prêt-à-porter</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
+                    </div>
+                </div>
+
+                <!-- Gastronomie -->
+                <div class="silent-border rounded-xl overflow-hidden card-hover group scale-in delay-500 p-6">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold tracking-widest brand-accent uppercase">Gastronomie</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Restaurants Étoilés</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4">
+                        Présence digitale discrète pour établissements gastronomiques d'exception
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <span class="text-xs text-discreet">Casablanca • Marrakech • Rabat</span>
+                        <span class="material-symbols-outlined text-brand-accent opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-2">arrow_forward</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Philosophy Section -->
-    <section id="philosophie" class="py-32 px-8">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <!-- Manifesto Section -->
+    <section id="about" class="py-20 px-6 border-t border-white/10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl brand-heading mb-2 text-center reveal-text">Le Manifeste</h2>
+            <p class="text-subtle text-center mb-12 max-w-xl mx-auto reveal-text delay-100">
+                "Nous ne construisons pas pour la visibilité. Nous architecturons pour l'autorité."
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div class="reveal-item">
-                    <span class="badge mb-6">NOTRE MANIFESTE</span>
-                    <h2 class="text-4xl md:text-5xl brand-heading mb-8">
-                        Le Silence<br>
-                        <span class="text-brand-primary">Comme Stratégie</span>
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <p class="text-subtle">
-                            Relevant House opère dans l'espace entre l'invisibilité physique et la souveraineté digitale. 
-                            Nous ne créons pas de présence bruyante, mais architecturons des écosystèmes numériques 
-                            qui parlent le langage de l'élite.
-                        </p>
-                        
-                        <p class="text-subtle">
-                            Chaque projet est une propriété privée digitale, conçue avec la même rigueur qu'un 
-                            objet d'artisanat d'exception. Nous travaillons avec moins de 10 entreprises par an, 
-                            garantissant une attention absolue et des résultats transformateurs.
-                        </p>
-                    </div>
+                    <h3 class="text-xl font-bold mb-4 brand-accent">Notre Philosophie</h3>
+                    <p class="text-subtle mb-4">
+                        Relevant House est une maison privée spécialisée dans la reconstruction d'entreprises 
+                        sous-représentées dans l'espace numérique. Nous opérons dans le silence, avec des systèmes 
+                        stricts et un contrôle total sur l'exécution.
+                    </p>
+                    <p class="text-subtle">
+                        Chaque projet est traité comme une propriété privée. Nous travaillons avec un nombre 
+                        très limité d'entreprises, uniquement lorsqu'il existe un potentiel clair et un alignement 
+                        parfait.
+                    </p>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="premium-card p-8 scale-in">
-                        <span class="material-symbols-outlined text-brand-primary text-3xl mb-6">visibility_off</span>
-                        <h4 class="text-lg font-medium mb-3">Discretion Digitale</h4>
-                        <p class="text-discreet text-sm">Une présence perceptible uniquement par ceux qui doivent la voir.</p>
+                <div class="reveal-item delay-100">
+                    <h3 class="text-xl font-bold mb-4 brand-accent">Notre Cible</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Espaces de Coworking Élite</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Agences Automobiles de Luxe</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Restaurants & Cafés Sélectifs</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-brand-accent text-sm mt-1">check_circle</span>
+                            <span class="text-subtle text-sm">Salons de Beauté d'Exception</span>
+                        </div>
                     </div>
-                    
-                    <div class="premium-card p-8 scale-in delay-100">
-                        <span class="material-symbols-outlined text-brand-primary text-3xl mb-6">schedule</span>
-                        <h4 class="text-lg font-medium mb-3">6 Mois Chrono</h4>
-                        <p class="text-discreet text-sm">Transformation complète en un temps record, sans compromis.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 silent-border rounded-xl reveal-item">
+                    <div class="size-12 mx-auto mb-4 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-accent">visibility_off</span>
                     </div>
-                    
-                    <div class="premium-card p-8 scale-in delay-200">
-                        <span class="material-symbols-outlined text-brand-primary text-3xl mb-6">workspace_premium</span>
-                        <h4 class="text-lg font-medium mb-3">Artisanat Digital</h4>
-                        <p class="text-discreet text-sm">Chaque ligne de code, chaque pixel, pensé comme un objet d'art.</p>
+                    <h4 class="font-bold mb-2">Le Silence Stratégique</h4>
+                    <p class="text-subtle text-sm">Présence digitale perceptible uniquement par l'élite ciblée</p>
+                </div>
+                <div class="text-center p-6 silent-border rounded-xl reveal-item delay-100">
+                    <div class="size-12 mx-auto mb-4 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-accent">design_services</span>
                     </div>
-                    
-                    <div class="premium-card p-8 scale-in delay-300">
-                        <span class="material-symbols-outlined text-brand-primary text-3xl mb-6">security</span>
-                        <h4 class="text-lg font-medium mb-3">Confidentialité Totale</h4>
-                        <p class="text-discreet text-sm">Nos clients restent anonymes, notre travail parle pour eux.</p>
+                    <h4 class="font-bold mb-2">Artisanat Digital</h4>
+                    <p class="text-subtle text-sm">Chaque projet est conçu sur-mesure, sans template</p>
+                </div>
+                <div class="text-center p-6 silent-border rounded-xl reveal-item delay-200">
+                    <div class="size-12 mx-auto mb-4 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-brand-accent">schedule</span>
                     </div>
+                    <h4 class="font-bold mb-2">Timing Maîtrisé</h4>
+                    <p class="text-subtle text-sm">Transformation complète en six mois chrono</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-32 px-8 bg-gradient-to-b from-black to-[#0a0a0a]">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-20">
-                <span class="badge mb-6">NOS DOMAINES D'EXCELLENCE</span>
-                <h2 class="text-4xl md:text-5xl brand-heading mb-6">Transformation<br>Sur Mesure</h2>
-                <p class="text-subtle max-w-2xl mx-auto">Des secteurs sélectionnés où notre expertise crée le plus d'impact</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="premium-card p-8 hover-lift scale-in">
-                    <div class="text-5xl brand-heading text-discreet mb-4">01</div>
-                    <h3 class="text-2xl brand-heading mb-4">Espaces d'Affaires</h3>
-                    <p class="text-subtle mb-6">Coworking élite, bureaux privés et centres d'affaires pour l'entrepreneuriat moderne.</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-3 text-discreet text-sm">
-                            <span class="material-symbols-outlined text-brand-primary text-sm">check</span>
-                            Signature by IWG
-                        </li>
-                        <li class="flex items-center gap-3 text-discreet text-sm">
-                            <span class="material-symbols-outlined text-brand-primary text-sm">check</span>
-                            WeWork Premium
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="premium-card p-8 hover-lift scale-in delay-100">
-                    <div class="text-5xl brand-heading text-discreet mb-4">02</div>
-                    <h3 class="text-2xl brand-heading mb-4">Automobile de Luxe</h3>
-                    <p class="text-subtle mb-6">Agences automobiles, gestion de collections et services premium.</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-3 text-discreet text-sm">
-                            <span class="material-symbols-outlined text-brand-primary text-sm">check</span>
-                            Vanguard Motors
-                        </li>
-                        <li class="flex items-center gap-3 text-discreet text-sm">
-                            <span class="material-symbols-outlined text-brand-primary text-sm">check</span>
-                            Zenith Cars
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="premium-card p-8 hover-lift scale-in delay-200">
-                    <div class="text-5xl brand-heading text-discreet mb-4">03</div>
-                    <h3 class="text-2xl brand-heading mb-4">Hospitalité & Voyage</h3>
-                    <p class="text-subtle mb-6">Expériences sur mesure, voyages d'affaires et résidences exclusives.</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-3 text-discreet text-sm">
-                            <span class="material-symbols-outlined text-brand-primary text-sm">check</span>
-                            Velaris Privé
-                        </li>
-                        <li class="flex items-center gap-3 text-discreet text-sm">
-                            <span class="material-symbols-outlined text-brand-primary text-sm">check</span>
-                            VIP Travel Experiences
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Carousel -->
-    <section id="portfolio" class="py-32 px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16">
-                <div>
-                    <span class="badge mb-6">PORTFOLIO SÉLECTIF</span>
-                    <h2 class="text-4xl md:text-5xl brand-heading">Réalisations<br>d'Exception</h2>
-                </div>
-                <div class="mt-6 lg:mt-0">
-                    <p class="text-subtle max-w-md">Des transformations digitales qui redéfinissent les standards de l'excellence dans leurs secteurs respectifs.</p>
-                </div>
-            </div>
-            
-            <!-- Splide Carousel -->
-            <div class="splide" id="portfolio-carousel">
-                <div class="splide__track">
-                    <div class="splide__list">
-                        <!-- Slide 1 -->
-                        <div class="splide__slide">
-                            <div class="premium-card h-[500px] relative overflow-hidden group">
-                                <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-brand-primary/20 z-10"></div>
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069')] bg-cover bg-center group-hover:scale-105 transition-transform duration-700"></div>
-                                <div class="relative z-20 h-full flex flex-col justify-end p-10">
-                                    <span class="badge self-start mb-4">ESPACES DE TRAVAIL</span>
-                                    <h3 class="text-3xl brand-heading mb-4">Signature by IWG</h3>
-                                    <p class="text-subtle mb-6">Transformation digitale complète d'un réseau d'espaces de travail premium à travers le Maroc.</p>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-discreet text-sm">6 mois de transformation</span>
-                                        <span class="text-brand-primary">•</span>
-                                        <span class="text-discreet text-sm">+300% de leads qualifiés</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 2 -->
-                        <div class="splide__slide">
-                            <div class="premium-card h-[500px] relative overflow-hidden group">
-                                <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-brand-primary/20 z-10"></div>
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2069')] bg-cover bg-center group-hover:scale-105 transition-transform duration-700"></div>
-                                <div class="relative z-20 h-full flex flex-col justify-end p-10">
-                                    <span class="badge self-start mb-4">AUTOMOBILE</span>
-                                    <h3 class="text-3xl brand-heading mb-4">Vanguard Motors</h3>
-                                    <p class="text-subtle mb-6">Plateforme digitale exclusive pour la gestion de collections automobiles d'élite.</p>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-discreet text-sm">Architecture sur mesure</span>
-                                        <span class="text-brand-primary">•</span>
-                                        <span class="text-discreet text-sm">Réservations privées uniquement</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 3 -->
-                        <div class="splide__slide">
-                            <div class="premium-card h-[500px] relative overflow-hidden group">
-                                <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-brand-primary/20 z-10"></div>
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070')] bg-cover bg-center group-hover:scale-105 transition-transform duration-700"></div>
-                                <div class="relative z-20 h-full flex flex-col justify-end p-10">
-                                    <span class="badge self-start mb-4">VOYAGE</span>
-                                    <h3 class="text-3xl brand-heading mb-4">Velaris Privé</h3>
-                                    <p class="text-subtle mb-6">Expériences voyage minimalistes à travers les paysages les plus prestigieux d'Europe.</p>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-discreet text-sm">Design avant-gardiste</span>
-                                        <span class="text-brand-primary">•</span>
-                                        <span class="text-discreet text-sm">Clientèle internationale exclusive</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="py-32 px-8 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-brand-primary/5"></div>
-        <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <span class="badge mb-6">ACCÈS RESTREINT</span>
-            <h2 class="text-4xl md:text-6xl brand-heading mb-8">
-                Relevant House<br>
-                <span class="text-gradient">n'est pas pour tous</span>
-            </h2>
-            
-            <p class="text-xl text-subtle mb-12 max-w-2xl mx-auto">
-                Si votre entreprise correspond à nos critères d'excellence et que vous comprenez que 
-                le luxe se construit dans la discrétion, nous pouvons entamer une conversation.
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 border-t border-white/10">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl brand-heading mb-6 reveal-text">Contact Privé</h2>
+            <p class="text-subtle mb-8 reveal-text delay-100">
+                Relevant House n'est pas accessible à tous. Si votre entreprise correspond à nos critères 
+                d'excellence et que vous comprenez que le luxe se construit dans la discrétion, nous pouvons 
+                entamer une conversation.
             </p>
-            
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="mailto:contact@relevanthouse.com" 
-                   class="group relative px-12 py-5 overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-primary to-[#5a0000] transform group-hover:scale-105 transition-transform duration-500"></div>
-                    <span class="relative text-sm font-medium tracking-widest">contact@relevanthouse.com</span>
+            <div class="reveal-text delay-200">
+                <a href="mailto:contact@relevanthouse.com" class="inline-block px-8 py-3 silent-border text-white rounded hover:bg-brand-accent hover:border-brand-accent transition-all duration-500">
+                    contact@relevanthouse.com
                 </a>
-                
-                <a href="tel:+212600000000" 
-                   class="px-12 py-5 border border-white/20 text-sm font-medium tracking-widest hover:bg-white/5 hover:border-white/40 transition-all duration-500">
-                    +212 600 000 000
-                </a>
+                <p class="text-discreet text-sm mt-4">Casablanca • Rabat • Marrakech • Tanger • Fès</p>
             </div>
-            
-            <p class="text-discreet text-sm mt-10">
-                Réponse sous 48h pour les demandes éligibles
-            </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 px-8 border-t border-white/10">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div>
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-px bg-brand-primary"></div>
-                        <h3 class="text-xl brand-heading">RELEVANT HOUSE</h3>
-                        <div class="w-12 h-px bg-brand-primary"></div>
-                    </div>
-                    <p class="text-discreet text-sm">
-                        Architecture digitale pour l'élite entrepreneuriale marocaine. 
-                        Transformation complète en six mois.
-                    </p>
+    <footer class="py-10 px-6 border-t border-white/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center gap-3 mb-6 md:mb-0">
+                    <div class="size-8 bg-brand-accent rounded-full pulse-animate"></div>
+                    <span class="text-lg font-semibold brand-heading">RELEVANT HOUSE</span>
                 </div>
-                
-                <div>
-                    <h4 class="text-sm font-medium tracking-wider mb-6">PRÉSENCE</h4>
-                    <div class="space-y-3">
-                        <p class="text-discreet text-sm">Casablanca</p>
-                        <p class="text-discreet text-sm">Rabat</p>
-                        <p class="text-discreet text-sm">Marrakech</p>
-                        <p class="text-discreet text-sm">Tanger</p>
-                        <p class="text-discreet text-sm">Fès</p>
-                    </div>
+                <div class="text-center md:text-right">
+                    <p class="text-discreet text-sm mb-2">Architecture digitale pour l'élite entrepreneuriale</p>
+                    <p class="text-discreet text-xs">© 2024 Relevant House. Tous droits réservés. Discrétion assurée.</p>
                 </div>
-                
-                <div>
-                    <h4 class="text-sm font-medium tracking-wider mb-6">CONFIDENTIALITÉ</h4>
-                    <p class="text-discreet text-sm mb-4">
-                        Tous nos projets et clients sont protégés par des accords de non-divulgation stricts.
-                    </p>
-                    <p class="text-discreet text-xs">
-                        © 2024 Relevant House. Tous droits réservés.<br>
-                        Pour usage exclusif de notre clientèle sélectionnée.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="border-t border-white/10 mt-12 pt-8 text-center">
-                <p class="text-discreet text-xs tracking-widest">
-                    SILENT LUXURY DIGITAL ARCHITECTURE
-                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-black border border-white/10 flex items-center justify-center hover:border-brand-primary transition-all duration-300 opacity-0">
-        <span class="material-symbols-outlined text-white">arrow_upward</span>
-    </button>
-
     <script>
-        // Initialize GSAP
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        // Initialize GSAP and ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
         
-        // Wait for everything to load
-        window.addEventListener('load', function() {
-            // Hide preloader
-            gsap.to('#preloader', {
-                opacity: 0,
+        // Page Load Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial animation for navigation
+            gsap.to('#main-nav', {
+                opacity: 1,
+                y: 0,
                 duration: 1,
-                onComplete: function() {
-                    document.getElementById('preloader').style.display = 'none';
-                    initAnimations();
-                }
-            });
-        });
-        
-        function initAnimations() {
-            // Navigation animation
-            gsap.from('#main-nav', {
-                y: -100,
-                opacity: 0,
-                duration: 1.5,
                 ease: "power3.out"
             });
             
-            // Hero animations
+            // Hero text animation
             gsap.to('.reveal-text', {
                 opacity: 1,
                 y: 0,
-                duration: 1.5,
-                stagger: 0.3,
-                ease: "power3.out",
-                delay: 0.5
-            });
-            
-            // Stagger animations for cards
-            gsap.to('.scale-in', {
-                opacity: 1,
-                scale: 1,
                 duration: 1.2,
                 stagger: 0.2,
                 ease: "power3.out",
+                delay: 0.3
+            });
+            
+            // Card animations
+            gsap.to('.scale-in', {
+                opacity: 1,
+                scale: 1,
+                duration: 1,
+                stagger: 0.1,
+                ease: "power3.out",
                 scrollTrigger: {
-                    trigger: '.scale-in',
-                    start: 'top 85%',
+                    trigger: '#showcase',
+                    start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
             });
             
-            // Section reveals
-            gsap.utils.toArray('.reveal-item').forEach(item => {
-                gsap.from(item, {
+            // About section animations
+            gsap.to('.reveal-item', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: '#about',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+            
+            // Contact section animation
+            gsap.to('#contact .reveal-text', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '#contact',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+            
+            // Fade-in on scroll for all sections
+            const sections = document.querySelectorAll('section, header');
+            sections.forEach(section => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
                     scrollTrigger: {
-                        trigger: item,
-                        start: 'top 90%',
+                        trigger: section,
+                        start: 'top 85%',
                         end: 'bottom 60%',
                         toggleActions: 'play none none reverse'
-                    },
-                    y: 60,
-                    opacity: 0,
-                    duration: 1.2,
-                    ease: "power3.out"
-                });
-            });
-            
-            // Parallax effects
-            gsap.utils.toArray('.parallax-layer').forEach(layer => {
-                gsap.to(layer, {
-                    yPercent: 20,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: layer.parentElement,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: true
                     }
                 });
             });
             
-            // Back to top button
-            const backToTop = document.getElementById('back-to-top');
-            
-            gsap.to(backToTop, {
-                opacity: 1,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: 'body',
-                    start: 'top top',
-                    end: '+=100',
-                    toggleActions: 'play none none reverse'
-                }
-            });
-            
-            backToTop.addEventListener('click', () => {
-                gsap.to(window, {
-                    duration: 1.5,
-                    scrollTo: 0,
-                    ease: "power3.inOut"
-                });
-            });
-            
-            // Initialize Splide Carousel
-            new Splide('#portfolio-carousel', {
-                type: 'slide',
-                perPage: 1,
-                perMove: 1,
-                gap: '2rem',
-                pagination: false,
-                arrows: true,
-                breakpoints: {
-                    1024: {
-                        perPage: 1,
-                    }
-                }
-            }).mount();
-            
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
-            });
-            
-            // Close mobile menu on link click
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-            
-            // Enhanced smooth scrolling for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Close mobile menu if open
-                        mobileMenu.classList.add('hidden');
-                        document.body.style.overflow = 'auto';
-                        
-                        // Smooth scroll
-                        gsap.to(window, {
-                            duration: 1.8,
-                            scrollTo: {
-                                y: targetElement,
-                                offsetY: 100
-                            },
-                            ease: "power3.inOut"
-                        });
-                    }
-                });
-            });
-            
-            // Cursor effects (optional)
-            const cursor = document.createElement('div');
-            cursor.className = 'fixed w-6 h-6 rounded-full border border-brand-primary pointer-events-none z-50 mix-blend-difference';
-            cursor.style.transform = 'translate(-50%, -50%)';
-            document.body.appendChild(cursor);
-            
-            document.addEventListener('mousemove', (e) => {
-                gsap.to(cursor, {
-                    x: e.clientX,
-                    y: e.clientY,
-                    duration: 0.2,
-                    ease: "power2.out"
-                });
-            });
-            
-            document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
-            document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-            
-            // Text effect on hover
-            document.querySelectorAll('.text-gradient').forEach(text => {
-                text.addEventListener('mouseenter', () => {
-                    gsap.to(text, {
-                        background: 'linear-gradient(135deg, #8B0000 0%, #FF0000 100%)',
-                        duration: 0.5,
+            // Hover animations for cards with GSAP
+            document.querySelectorAll('.card-hover').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        y: -8,
+                        duration: 0.3,
                         ease: "power2.out"
                     });
                 });
                 
-                text.addEventListener('mouseleave', () => {
-                    gsap.to(text, {
-                        background: 'linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%)',
-                        duration: 0.5,
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        y: 0,
+                        duration: 0.3,
                         ease: "power2.out"
                     });
                 });
             });
-        }
+            
+            // Subtle pulse animation for accent elements
+            gsap.to('.pulse-animate', {
+                opacity: 0.5,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut"
+            });
+        });
         
-        // Handle page visibility
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                gsap.to('body', {
-                    opacity: 1,
-                    duration: 0.5
-                });
-            }
+        // Enhanced smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    gsap.to(window, {
+                        duration: 1.5,
+                        scrollTo: {
+                            y: targetElement,
+                            offsetY: 80
+                        },
+                        ease: "power3.inOut"
+                    });
+                }
+            });
+        });
+        
+        // Scroll progress indicator (simplified)
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            
+            // You could add a progress bar here if needed
         });
     </script>
 </body>
